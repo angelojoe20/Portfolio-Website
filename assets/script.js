@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // eslint-disable-next-line no-new
     new Typed("#typed-text", {
       strings: [
-        "Building cloud-ready systems and IoT solutions.",
+        "Building cloud-ready systems and DevOps solutions.",
         "Computer Engineering student focused on Cloud & DevOps.",
         "Open to collaborations — let’s build something."
       ],
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cursorChar: "|"
     });
   } else if (typedTarget) {
-    typedTarget.textContent = "Building cloud-ready systems and IoT solutions.";
+    typedTarget.textContent = "Building cloud-ready systems and DevOps solutions.";
   }
 
   // 5) tsParticles (HERO only — calmer, premium)
