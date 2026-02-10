@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +11,7 @@
     <!-- SEO -->
     <meta
       name="description"
-      content="Angelo Joe Delos Santos — DevOps & Cloud Engineer. Explore my projects, experience, certifications, and skills."
+      content="Angelo Joe Delos Santos — IoT & Cloud Engineer. Explore my projects, experience, certifications, and skills."
     />
     <meta property="og:title" content="Angelo Joe Delos Santos" />
     <meta
@@ -25,11 +26,11 @@
 
     <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- AOS (keep for now) -->
+    <!-- AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
     <!-- Main CSS -->
@@ -39,12 +40,17 @@
   <body>
     <!-- ====== Header / Nav ====== -->
     <header class="site-header">
-      <nav class="navbar" role="navigation">
+      <nav class="navbar" role="navigation" aria-label="Primary">
         <div class="nav-logo">
           <a href="#home" aria-label="Go to top">Angelo</a>
         </div>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
           ☰
         </button>
 
@@ -54,30 +60,25 @@
           <li><a href="#leadership">Organizations</a></li>
           <li><a href="#certifications">Certifications</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#hiking">Hiking</a></li>
         </ul>
       </nav>
 
       <!-- ====== Hero ====== -->
       <section class="hero" id="home" data-aos="fade-up">
-        <!-- Keep particles only for hero (we'll adjust script.js next) -->
         <div id="particles-js" aria-hidden="true"></div>
 
         <div class="hero-content-container">
           <div class="hero-left">
             <p class="hero-greeting">Hi, I’m</p>
-
             <h1 class="hero-title">Angelo Joe Delos Santos</h1>
 
-            <p class="hero-tagline">
-              DevOps & Cloud Engineer · Open-Source Enthusiast
-            </p>
+            <p class="hero-tagline">IoT & Cloud Engineer · Open-Source Enthusiast</p>
 
-            <!-- Typed.js subtitle -->
             <p class="hero-subtitle">
               <span id="typed-text"></span>
             </p>
 
-            <!-- Proof chips (neutral-style) -->
             <div class="hero-chips" aria-label="Highlights">
               <span class="chip">AWS Certified</span>
               <span class="chip">Cloud & DevOps</span>
@@ -85,11 +86,7 @@
             </div>
 
             <div class="hero-actions">
-              <a
-                href="pdfs/AngeloJ_CV.pdf"
-                class="btn btn-primary"
-                download="AngeloJ_CV.pdf"
-              >
+              <a href="pdfs/AngeloJ_CV.pdf" class="btn btn-primary" download="AngeloJ_CV.pdf">
                 Download Resume
               </a>
               <a href="#projects" class="btn btn-secondary">View Projects</a>
@@ -158,14 +155,12 @@
 
               <p class="about-me-description" data-aos="fade-up" data-aos-delay="200">
                 Hello! I’m Angelo Joe Delos Santos — a
-                <span class="highlight"
-                  >Computer Engineering student at Pamantasan ng Lungsod ng Maynila</span
-                >
-                who loves turning challenges into creative solutions. I believe in continuous learning and innovation, always striving to make a meaningful impact.
+                <span class="highlight">Computer Engineering student at Pamantasan ng Lungsod ng Maynila</span>
+                who loves turning challenges into creative solutions. I believe in continuous learning and innovation,
+                always striving to make a meaningful impact.
               </p>
 
               <div class="about-actions">
-                <!-- recommend email/LinkedIn later; keep your link for now -->
                 <a
                   href="https://www.facebook.com/eyydyyeyyy"
                   class="btn btn-primary"
@@ -180,7 +175,7 @@
             <div
               class="about-me-image-container"
               data-tilt
-              data-tilt-max="12"
+              data-tilt-max="10"
               data-aos="fade-left"
               data-aos-delay="250"
             >
@@ -236,130 +231,211 @@
         </div>
       </section>
 
-      <!-- ====== Experience (keep structure for now) ====== -->
+      <!-- ====== Experience (Notion-style log) ====== -->
       <section class="experience-section" id="experience" data-aos="fade-up">
         <div class="container">
           <h2 class="section-heading" data-aos="fade-down" data-aos-delay="100">
             Work Experience
           </h2>
 
-          <div class="timeline">
-            <!-- Keep your existing timeline entries (unchanged) -->
+          <div class="exp-list">
             <!-- Valueline -->
-            <div class="timeline-entry right">
-              <div class="timeline-marker">
-                <img src="images/valueline.png" alt="Valueline logo" />
+            <article class="exp-item" data-aos="fade-up" data-tilt data-tilt-max="6">
+              <div class="exp-meta">
+                <span class="exp-dates">May 2025 – Present</span>
               </div>
-              <article class="timeline-content" data-aos="fade-left" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <header class="exp-header">
-                  <h3>Valueline System Solutions Corporation</h3>
-                  <span class="dates">May 2025 – Present</span>
-                </header>
-                <div class="exp-body">
-                  <p>Engaged in pre-sales activities, designed technical solutions, and collaborated on cloud architecture for enterprise clients.</p>
-                  <div class="skills">
-                    <span class="skill">Presales Engineering</span>
-                    <span class="skill">Solutions Architecture</span>
-                    <span class="skill">Technical Consulting</span>
-                    <span class="skill">AWS Solutions</span>
+
+              <div class="exp-card">
+                <header class="exp-card-header">
+                  <div class="exp-logo">
+                    <img src="images/valueline.png" alt="Valueline logo" loading="lazy" />
                   </div>
-                  <a href="https://valuelinegroup.com/" class="learn-more" target="_blank" rel="noreferrer">Learn More</a>
+                  <div class="exp-headings">
+                    <h3>Valueline System Solutions Corporation</h3>
+                    <p class="exp-role">
+                      Solutions Architect (Jan 2026 – Present) · Presales Engineer (May 2025 – Dec 2025)
+                    </p>
+                  </div>
+                </header>
+
+                <div class="exp-card-body">
+                  <div class="role-split">
+                    <div class="role-block">
+                      <h4 class="role-title">
+                        Solutions Architect <span class="role-dates">· Jan 2026 – Present</span>
+                      </h4>
+                      <ul class="role-list">
+                        <li>Design secure, scalable, cost-efficient cloud, hybrid, and on-premises architectures.</li>
+                        <li>Develop architecture diagrams, migration strategies, and TCO/ROI models for transformations.</li>
+                        <li>Deliver solution presentations, POCs, and architecture reviews as the bridge between sales and delivery.</li>
+                      </ul>
+                    </div>
+
+                    <div class="role-block">
+                      <h4 class="role-title">
+                        Presales Engineer <span class="role-dates">· May 2025 – Dec 2025</span>
+                      </h4>
+                      <ul class="role-list">
+                        <li>Supported enterprise solutioning across AWS, virtualization, servers, storage, and networks.</li>
+                        <li>Designed and validated backup, DR, and security solutions aligned with best practices.</li>
+                        <li>Contributed to client-facing engagements and proof-of-concept validation.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="pill-row">
+                    <span class="pill">Solutions Architecture</span>
+                    <span class="pill">Presales Engineering</span>
+                    <span class="pill">Cloud & Hybrid Design</span>
+                    <span class="pill">POCs & Architecture Reviews</span>
+                    <span class="pill">AWS Best Practices</span>
+                  </div>
+
+                  <a href="https://valueline.com.ph/" class="learn-more" target="_blank" rel="noreferrer">
+                    Learn More
+                  </a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
 
             <!-- Delsan -->
-            <div class="timeline-entry">
-              <div class="timeline-marker">
-                <img src="images/delsan.png" alt="Delsan logo" />
+            <article class="exp-item" data-aos="fade-up" data-aos-delay="50" data-tilt data-tilt-max="6">
+              <div class="exp-meta">
+                <span class="exp-dates">February 2025 – March 2025</span>
               </div>
-              <article class="timeline-content" data-aos="fade-right" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <header class="exp-header">
-                  <h3>Delsan Office System Corp.</h3>
-                  <span class="dates">February 2025 – March 2025</span>
-                </header>
-                <div class="exp-body">
-                  <p>Maintained databases, optimized data retrieval, and troubleshot printer issues.</p>
-                  <div class="skills">
-                    <span class="skill">Quality Testing</span>
-                    <span class="skill">Database Administration</span>
-                    <span class="skill">Google Workspace</span>
+
+              <div class="exp-card">
+                <header class="exp-card-header">
+                  <div class="exp-logo">
+                    <img src="images/delsan.png" alt="Delsan logo" loading="lazy" />
                   </div>
-                  <a href="https://delsanonline.com/about.html" class="learn-more" target="_blank" rel="noreferrer">Learn More</a>
+                  <div class="exp-headings">
+                    <h3>Delsan Office System Corp.</h3>
+                    <p class="exp-role">Database Administrator Intern · Quality Testing Intern (Feb 2025 – Mar 2025)</p>
+                  </div>
+                </header>
+
+                <div class="exp-card-body">
+                  <p>Maintained databases, optimized data retrieval, and troubleshot printer issues.</p>
+
+                  <div class="pill-row">
+                    <span class="pill">Quality Testing</span>
+                    <span class="pill">Database Administration</span>
+                    <span class="pill">Google Workspace</span>
+                  </div>
+
+                  <a href="https://delsanonline.com/about.html" class="learn-more" target="_blank" rel="noreferrer">
+                    Learn More
+                  </a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
 
             <!-- Achieve -->
-            <div class="timeline-entry right">
-              <div class="timeline-marker">
-                <img src="images/achieve.png" alt="Achieve Without Borders logo" />
+            <article class="exp-item" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="6">
+              <div class="exp-meta">
+                <span class="exp-dates">November 2024 – February 2025</span>
               </div>
-              <article class="timeline-content" data-aos="fade-left" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <header class="exp-header">
-                  <h3>Achieve Without Borders Inc.</h3>
-                  <span class="dates">November 2024 – February 2025</span>
-                </header>
-                <div class="exp-body">
-                  <p>Focused on ERP &amp; Odoo infrastructure, optimized performance, and collaborated on Google Cloud solutions.</p>
-                  <div class="skills">
-                    <span class="skill">Google Cloud</span>
-                    <span class="skill">Odoo</span>
-                    <span class="skill">Docker</span>
-                    <span class="skill">PostgreSQL</span>
+
+              <div class="exp-card">
+                <header class="exp-card-header">
+                  <div class="exp-logo">
+                    <img src="images/achieve.png" alt="Achieve Without Borders logo" loading="lazy" />
                   </div>
-                  <a href="https://achievewithoutborders.com/" class="learn-more" target="_blank" rel="noreferrer">Learn More</a>
+                  <div class="exp-headings">
+                    <h3>Achieve Without Borders Inc.</h3>
+                    <p class="exp-role">Cloud Engineering Intern (Nov 2024 – Feb 2025)</p>
+                  </div>
+                </header>
+
+                <div class="exp-card-body">
+                  <p>
+                    Focused on ERP &amp; Odoo infrastructure, optimized performance, and collaborated on Google Cloud solutions.
+                  </p>
+
+                  <div class="pill-row">
+                    <span class="pill">Google Cloud</span>
+                    <span class="pill">Odoo</span>
+                    <span class="pill">Docker</span>
+                    <span class="pill">PostgreSQL</span>
+                  </div>
+
+                  <a href="https://achievewithoutborders.com/" class="learn-more" target="_blank" rel="noreferrer">
+                    Learn More
+                  </a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
 
             <!-- Concentrix -->
-            <div class="timeline-entry">
-              <div class="timeline-marker">
-                <img src="images/concentrix.png" alt="Concentrix logo" />
+            <article class="exp-item" data-aos="fade-up" data-aos-delay="150" data-tilt data-tilt-max="6">
+              <div class="exp-meta">
+                <span class="exp-dates">June 2022 – January 2023</span>
               </div>
-              <article class="timeline-content" data-aos="fade-left" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <header class="exp-header">
-                  <h3>Concentrix CVG Philippines Inc.</h3>
-                  <span class="dates">June 2022 – January 2023</span>
-                </header>
-                <div class="exp-body">
-                  <p>Handled financial inquiries, maintained key performance metrics, and achieved high CSAT scores.</p>
-                  <div class="skills">
-                    <span class="skill">Customer Service</span>
-                    <span class="skill">Communication</span>
+
+              <div class="exp-card">
+                <header class="exp-card-header">
+                  <div class="exp-logo">
+                    <img src="images/concentrix.png" alt="Concentrix logo" loading="lazy" />
                   </div>
-                  <a href="https://www.concentrix.com/about/" class="learn-more" target="_blank" rel="noreferrer">Learn More</a>
+                  <div class="exp-headings">
+                    <h3>Concentrix CVG Philippines Inc.</h3>
+                    <p class="exp-role">Customer Service Representative (Jun 2022 – Jan 2023)</p>
+                  </div>
+                </header>
+
+                <div class="exp-card-body">
+                  <p>Handled financial inquiries, maintained key performance metrics, and achieved high CSAT scores.</p>
+
+                  <div class="pill-row">
+                    <span class="pill">Customer Service</span>
+                    <span class="pill">Communication</span>
+                  </div>
+
+                  <a href="https://www.concentrix.com/about/" class="learn-more" target="_blank" rel="noreferrer">
+                    Learn More
+                  </a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
 
             <!-- Inspiro -->
-            <div class="timeline-entry right">
-              <div class="timeline-marker">
-                <img src="images/inspiro.png" alt="Inspiro logo" />
+            <article class="exp-item" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="6">
+              <div class="exp-meta">
+                <span class="exp-dates">March 2022 – May 2022</span>
               </div>
-              <article class="timeline-content" data-aos="fade-right" data-tilt data-tilt-max="8" data-tilt-scale="1.02">
-                <header class="exp-header">
-                  <h3>Inspiro Relia Company Inc.</h3>
-                  <span class="dates">March 2022 – May 2022</span>
-                </header>
-                <div class="exp-body">
-                  <p>Managed chat sessions, ensured quick responses, and escalated issues when necessary.</p>
-                  <div class="skills">
-                    <span class="skill">Chat Support</span>
-                    <span class="skill">Customer Service</span>
-                    <span class="skill">Communication</span>
+
+              <div class="exp-card">
+                <header class="exp-card-header">
+                  <div class="exp-logo">
+                    <img src="images/inspiro.png" alt="Inspiro logo" loading="lazy" />
                   </div>
-                  <a href="https://inspiro.com/about/" class="learn-more" target="_blank" rel="noreferrer">Learn More</a>
+                  <div class="exp-headings">
+                    <h3>Inspiro Relia Company Inc.</h3>
+                    <p class="exp-role">Chat Support Representative (Mar 2022 – May 2022)</p>
+                  </div>
+                </header>
+
+                <div class="exp-card-body">
+                  <p>Managed chat sessions, ensured quick responses, and escalated issues when necessary.</p>
+
+                  <div class="pill-row">
+                    <span class="pill">Chat Support</span>
+                    <span class="pill">Customer Service</span>
+                    <span class="pill">Communication</span>
+                  </div>
+
+                  <a href="https://inspiro.com/about/" class="learn-more" target="_blank" rel="noreferrer">
+                    Learn More
+                  </a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- ====== Leadership (keep cards, we’ll neutralize colors in CSS later) ====== -->
+      <!-- ====== Leadership ====== -->
       <section id="leadership" class="leadership-section" data-aos="fade-up">
         <div class="container">
           <h2 class="section-heading" data-aos="fade-down" data-aos-delay="100">
@@ -399,7 +475,9 @@
                   <h3>AWS Cloud Clubs Philippines</h3>
                   <span class="badge">Partnership Officer</span>
                   <p class="dates">September 2024 - June 2025</p>
-                  <p class="description">Facilitated collaborations between AWS and student communities to drive cloud learning.</p>
+                  <p class="description">
+                    Facilitated collaborations between AWS and student communities to drive cloud learning.
+                  </p>
                   <div class="org-skills">
                     <span class="skill-tag">Cloud Learning</span>
                     <span class="skill-tag">Community Building</span>
@@ -420,7 +498,9 @@
                   <h3>AWS Cloud Clubs - PLM</h3>
                   <span class="badge">External Relations Lead</span>
                   <p class="dates">February 2024 - June 2025</p>
-                  <p class="description">Organized cloud-related events, established sponsorships & partnerships, and promoted cloud education initiatives.</p>
+                  <p class="description">
+                    Organized cloud-related events, established sponsorships & partnerships, and promoted cloud education initiatives.
+                  </p>
                   <div class="org-skills">
                     <span class="skill-tag">Event Organizing</span>
                     <span class="skill-tag">Sponsorships</span>
@@ -441,7 +521,10 @@
                   <h3>Google Developers Student Club - PLM</h3>
                   <span class="badge">Core Member, External Relations & Cloud Googler</span>
                   <p class="dates">October 2021 - June 2025</p>
-                  <p class="description">Assisted in organizing developer events and cloud-related activities, fostering engagement within the tech community. Managed external relations, collaborating with industry partners.</p>
+                  <p class="description">
+                    Assisted in organizing developer events and cloud-related activities, fostering engagement within the tech community.
+                    Managed external relations, collaborating with industry partners.
+                  </p>
                   <div class="org-skills">
                     <span class="skill-tag">Developer Events</span>
                     <span class="skill-tag">Community Engagement</span>
@@ -454,157 +537,180 @@
         </div>
       </section>
 
-<!-- ====== Certifications (PDF preview + download) ====== -->
-<section id="certifications" class="certifications-section" data-aos="fade-up">
-  <div class="container">
-    <h2 class="section-heading">Certifications</h2>
+      <!-- ====== Certifications (PDF preview + download) ====== -->
+      <section id="certifications" class="certifications-section" data-aos="fade-up">
+        <div class="container">
+          <h2 class="section-heading">Certifications</h2>
 
-    <div class="certifications-grid">
+          <div class="certifications-grid">
+            <!-- AWS Advanced Networking Specialty -->
+            <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="50">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <div class="cert-image cert-pdf">
+                    <iframe
+                      src="images/AWS ANS.pdf#page=1&view=FitH"
+                      title="AWS Certified Advanced Networking – Specialty PDF"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="cert-info">
+                    <h3>AWS Certified Advanced Networking – Specialty</h3>
+                    <p class="cert-dates">Passed: Sep 2025<br />Expires: Sep 2028</p>
+                  </div>
+                </div>
 
-      <!-- AWS Advanced Networking Specialty -->
-      <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="50">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="cert-image cert-pdf">
-              <iframe
-                src="images/AWS ANS.pdf#page=1&view=FitH"
-                title="AWS Certified Advanced Networking – Specialty PDF"
-                loading="lazy"
-              ></iframe>
-            </div>
-            <div class="cert-info">
-              <h3>AWS Certified Advanced Networking – Specialty</h3>
-              <p class="cert-dates">Passed: Sep 2025<br />Expires: Sep 2028</p>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>What I Learned</h3>
-            <p>Designed and implemented AWS and hybrid IT network architectures at scale. Deepened security and troubleshooting skills in cloud networking.</p>
-            <div class="btns">
-              <a href="https://www.credly.com/badges/57889542-0a1a-48dc-8a43-a5e7558924fd/public_url"
-                 class="btn primary" target="_blank" rel="noreferrer">Verify</a>
-              <a href="images/AWS ANS.pdf" class="btn secondary" download>Download PDF</a>
-            </div>
+                <div class="flip-back">
+                  <h3>What I Learned</h3>
+                  <p>
+                    Designed and implemented AWS and hybrid IT network architectures at scale. Deepened security and troubleshooting skills in cloud networking.
+                  </p>
+                  <div class="btns">
+                    <a
+                      href="https://www.credly.com/badges/57889542-0a1a-48dc-8a43-a5e7558924fd/public_url"
+                      class="btn primary"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Verify</a
+                    >
+                    <a href="images/AWS ANS.pdf" class="btn secondary" download>Download PDF</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- AWS Solutions Architect Associate -->
+            <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <div class="cert-image cert-pdf">
+                    <iframe
+                      src="images/AWS SAA.pdf#page=1&view=FitH"
+                      title="AWS Solutions Architect Associate PDF"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="cert-info">
+                    <h3>AWS Solutions Architect Associate</h3>
+                    <p class="cert-dates">Passed: July 2025<br />Expires: July 2028</p>
+                  </div>
+                </div>
+
+                <div class="flip-back">
+                  <h3>What I Learned</h3>
+                  <p>
+                    Designed scalable, highly available systems on AWS, applying best practices for cost optimization and security.
+                  </p>
+                  <div class="btns">
+                    <a
+                      href="https://www.credly.com/badges/6d7cdb2e-8113-4a46-8bd1-a38ce65387d3/public_url"
+                      class="btn primary"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Verify</a
+                    >
+                    <a href="images/AWS SAA.pdf" class="btn secondary" download>Download PDF</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- AWS Cloud Practitioner -->
+            <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <div class="cert-image cert-pdf">
+                    <iframe
+                      src="images/AWS CCP.pdf#page=1&view=FitH"
+                      title="AWS Cloud Practitioner PDF"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="cert-info">
+                    <h3>AWS Cloud Practitioner</h3>
+                    <p class="cert-dates">Passed: Jan 2025<br />Expires: Jan 2028</p>
+                  </div>
+                </div>
+
+                <div class="flip-back">
+                  <h3>What I Learned</h3>
+                  <p>
+                    Hands-on practice with IAM, EC2, S3, VPC, and AWS best practices across core cloud services.
+                  </p>
+                  <div class="btns">
+                    <a
+                      href="https://www.credly.com/badges/ac3f5eed-59d9-4894-b1e6-4c27ba816446/public_url"
+                      class="btn primary"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Verify</a
+                    >
+                    <a href="images/AWS CCP.pdf" class="btn secondary" download>Download PDF</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- AWS AI Fundamentals -->
+            <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="250">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <div class="cert-image cert-pdf">
+                    <iframe
+                      src="images/AWS AIF.pdf#page=1&view=FitH"
+                      title="AWS AI Fundamentals PDF"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="cert-info">
+                    <h3>AWS AI Fundamentals</h3>
+                    <p class="cert-dates">Passed: Oct 2025<br />Expires: Oct 2028</p>
+                  </div>
+                </div>
+
+                <div class="flip-back">
+                  <h3>What I Learned</h3>
+                  <p>Core AI concepts, foundational AWS AI services, and practical ways to apply AI workflows responsibly.</p>
+                  <div class="btns">
+                    <a href="images/AWS AIF.pdf" class="btn primary" target="_blank" rel="noreferrer">Open</a>
+                    <a href="images/AWS AIF.pdf" class="btn secondary" download>Download PDF</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- AWS Solutions Architect Professional -->
+            <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <div class="cert-image cert-pdf">
+                    <iframe
+                      src="images/AWS SAP.pdf#page=1&view=FitH"
+                      title="AWS Solutions Architect Professional PDF"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="cert-info">
+                    <h3>AWS Solutions Architect Professional</h3>
+                    <p class="cert-dates">Passed: Nov 2025<br />Expires: Nov 2028</p>
+                  </div>
+                </div>
+
+                <div class="flip-back">
+                  <h3>What I Learned</h3>
+                  <p>Advanced architecture patterns, complex migrations, governance, and reliability at enterprise scale.</p>
+                  <div class="btns">
+                    <a href="images/AWS SAP.pdf" class="btn primary" target="_blank" rel="noreferrer">Open</a>
+                    <a href="images/AWS SAP.pdf" class="btn secondary" download>Download PDF</a>
+                  </div>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </article>
+      </section>
 
-      <!-- AWS Solutions Architect Associate -->
-      <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="cert-image cert-pdf">
-              <iframe
-                src="images/AWS SAA.pdf#page=1&view=FitH"
-                title="AWS Solutions Architect Associate PDF"
-                loading="lazy"
-              ></iframe>
-            </div>
-            <div class="cert-info">
-              <h3>AWS Solutions Architect Associate</h3>
-              <p class="cert-dates">Passed: July 2025<br />Expires: July 2028</p>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>What I Learned</h3>
-            <p>Designed scalable, highly available systems on AWS, applying best practices for cost optimization and security.</p>
-            <div class="btns">
-              <a href="https://www.credly.com/badges/6d7cdb2e-8113-4a46-8bd1-a38ce65387d3/public_url"
-                 class="btn primary" target="_blank" rel="noreferrer">Verify</a>
-              <a href="images/AWS SAA.pdf" class="btn secondary" download>Download PDF</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- AWS Cloud Practitioner -->
-      <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="cert-image cert-pdf">
-              <iframe
-                src="images/AWS CCP.pdf#page=1&view=FitH"
-                title="AWS Cloud Practitioner PDF"
-                loading="lazy"
-              ></iframe>
-            </div>
-            <div class="cert-info">
-              <h3>AWS Cloud Practitioner</h3>
-              <p class="cert-dates">Passed: Jan 2025<br />Expires: Jan 2028</p>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>What I Learned</h3>
-            <p>Hands-on practice with IAM, EC2, S3, VPC, and AWS best practices across core cloud services.</p>
-            <div class="btns">
-              <a href="https://www.credly.com/badges/ac3f5eed-59d9-4894-b1e6-4c27ba816446/public_url"
-                 class="btn primary" target="_blank" rel="noreferrer">Verify</a>
-              <a href="images/AWS CCP.pdf" class="btn secondary" download>Download PDF</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- AWS AI Fundamentals (PDF) -->
-      <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="250">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="cert-image cert-pdf">
-              <iframe
-                src="images/AWS AIF.pdf#page=1&view=FitH"
-                title="AWS AI Fundamentals PDF"
-                loading="lazy"
-              ></iframe>
-            </div>
-            <div class="cert-info">
-              <h3>AWS AI Fundamentals</h3>
-              <p class="cert-dates">Issued: 2025</p>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>What I Learned</h3>
-            <p>Core AI concepts, foundational AWS AI services, and practical ways to apply AI workflows responsibly.</p>
-            <div class="btns">
-              <a href="images/AWS AIF.pdf" class="btn primary" target="_blank" rel="noreferrer">Open</a>
-              <a href="images/AWS AIF.pdf" class="btn secondary" download>Download PDF</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- AWS Solutions Architect Professional (PDF) -->
-      <article class="cert-card flip-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <div class="cert-image cert-pdf">
-              <iframe
-                src="images/AWS SAP.pdf#page=1&view=FitH"
-                title="AWS Solutions Architect Professional PDF"
-                loading="lazy"
-              ></iframe>
-            </div>
-            <div class="cert-info">
-              <h3>AWS Solutions Architect Professional</h3>
-              <p class="cert-dates">Issued: 2025</p>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>What I Learned</h3>
-            <p>Advanced architecture patterns, complex migrations, governance, and reliability at enterprise scale.</p>
-            <div class="btns">
-              <a href="images/AWS SAP.pdf" class="btn primary" target="_blank" rel="noreferrer">Open</a>
-              <a href="images/AWS SAP.pdf" class="btn secondary" download>Download PDF</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-
-      <!-- ====== Projects (NEW: filter bar like reference) ====== -->
+      <!-- ====== Projects ====== -->
       <section id="projects" class="projects-section" data-aos="fade-up">
         <div class="container">
           <div class="projects-header">
@@ -620,7 +726,6 @@
           </div>
 
           <div class="projects-grid">
-            <!-- Example: categorize this as iot/app -->
             <article class="project-card" data-category="iot app">
               <img src="images/vendomed.png" alt="VendoMedicine Screenshot" class="project-image" loading="lazy" />
               <div class="project-content">
@@ -658,6 +763,68 @@
                 <a href="https://github.com/angelojoe20/Library-Management-System.git" class="btn-link" target="_blank" rel="noreferrer">
                   Source Code →
                 </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== Hiking ====== -->
+      <section id="hiking" class="hiking-section" data-aos="fade-up">
+        <div class="container">
+          <div class="hiking-header">
+            <h2 class="section-heading">Hiking</h2>
+            <p class="section-subtitle">Mountains I’ve completed so far — one climb at a time ⛰️</p>
+          </div>
+
+          <div class="hike-stats" aria-label="Hiking stats">
+            <div class="stat-card">
+              <p class="stat-label">Completed Mountains</p>
+              <p class="stat-value" id="hikeCount">0</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-label">Latest Hike</p>
+              <p class="stat-value" id="latestHike">—</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-label">Goal</p>
+              <p class="stat-value">12+</p>
+            </div>
+          </div>
+
+          <div class="hike-grid" id="hikeGrid">
+            <article class="hike-card" data-date="2025-12-01">
+              <img src="images/hikes/sample1.jpg" alt="Mt. Example photo" class="hike-image" loading="lazy" />
+              <div class="hike-content">
+                <div class="hike-top">
+                  <h3>Mt. Example</h3>
+                  <span class="hike-badge">Completed</span>
+                </div>
+                <p class="hike-meta">📍 Rizal • Difficulty: Moderate • Trail: Dayhike</p>
+                <p class="hike-desc">Sunrise trek + sea of clouds. Great trail and fun camp vibes.</p>
+                <div class="hike-tags">
+                  <span class="tag">Dayhike</span>
+                  <span class="tag">Sunrise</span>
+                  <span class="tag">Moderate</span>
+                </div>
+                <a class="btn-link" href="#" target="_blank" rel="noreferrer">View Photos →</a>
+              </div>
+            </article>
+
+            <article class="hike-card" data-date="2025-08-15">
+              <img src="images/hikes/sample2.jpg" alt="Mt. Sample photo" class="hike-image" loading="lazy" />
+              <div class="hike-content">
+                <div class="hike-top">
+                  <h3>Mt. Sample</h3>
+                  <span class="hike-badge">Completed</span>
+                </div>
+                <p class="hike-meta">📍 Batangas • Difficulty: Easy • Trail: Dayhike</p>
+                <p class="hike-desc">Chill trail with a super scenic summit view. Perfect weekend climb.</p>
+                <div class="hike-tags">
+                  <span class="tag">Easy</span>
+                  <span class="tag">Weekend</span>
+                </div>
+                <a class="btn-link" href="#" target="_blank" rel="noreferrer">View Photos →</a>
               </div>
             </article>
           </div>

@@ -1,3 +1,4 @@
+// assets/script.js
 document.addEventListener("DOMContentLoaded", () => {
   // 1) Reduced-motion helper
   const prefersReducedMotion = () =>
@@ -15,16 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3) Initialize AOS
   if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
     AOS.init({ duration: 700, once: false, offset: 80 });
-  } else {
-    // no need to warn users; just silently skip
   }
 
   // 4) Typed.js rotating subtitle
   const typedTarget = document.getElementById("typed-text");
   if (typedTarget && typeof Typed !== "undefined" && !prefersReducedMotion()) {
+    // eslint-disable-next-line no-new
     new Typed("#typed-text", {
       strings: [
-        "Building cloud-ready systems and enterprise IT solutions.",
+        "Building cloud-ready systems and IoT solutions.",
         "Computer Engineering student focused on Cloud & DevOps.",
         "Open to collaborations — let’s build something."
       ],
@@ -36,10 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
       cursorChar: "|"
     });
   } else if (typedTarget) {
-    typedTarget.textContent = "Building cloud-ready systems and enterprise IT solutions.";
+    typedTarget.textContent = "Building cloud-ready systems and IoT solutions.";
   }
 
-  // 5) tsParticles (HERO only — calmer, more premium)
+  // 5) tsParticles (HERO only — calmer, premium)
   if (window.tsParticles && !prefersReducedMotion()) {
     const heroParticlesEl = document.getElementById("particles-js");
     if (heroParticlesEl) {
@@ -77,12 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 6) VanillaTilt
+  // 6) VanillaTilt (cards + about image)
   if (window.VanillaTilt && !prefersReducedMotion()) {
     const tiltElems = document.querySelectorAll("[data-tilt]");
     if (tiltElems.length) {
       VanillaTilt.init(tiltElems, {
-        max: 10,
+        max: 8,
         speed: 400,
         glare: false,
         scale: 1.02
@@ -90,30 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7) Navbar show/hide (kept)
+  // 7) Navbar show/hide (safer: show after hero, keep visible while scrolling)
   const nav = document.querySelector(".navbar");
   const heroSection = document.getElementById("home");
-  const aboutSection = document.getElementById("about-me");
-  const projectsSection = document.getElementById("projects");
 
-  if (nav && heroSection && aboutSection && projectsSection) {
+  if (nav && heroSection) {
     new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && nav.classList.remove("visible")),
-      { threshold: 0 }
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) nav.classList.remove("visible");
+          else nav.classList.add("visible");
+        }),
+      { threshold: 0.2 }
     ).observe(heroSection);
-
-    new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && nav.classList.add("visible")),
-      { threshold: 0.1, rootMargin: "-80px 0px 0px 0px" }
-    ).observe(aboutSection);
-
-    new IntersectionObserver(
-      (entries) => entries.forEach((e) => !e.isIntersecting && nav.classList.remove("visible")),
-      { threshold: 0, rootMargin: "0px 0px -100% 0px" }
-    ).observe(projectsSection);
   }
 
-  // 8) Mobile nav toggle (NEW)
+  // 8) Mobile nav toggle
   const navToggle = document.getElementById("navToggle");
   const navLinks = document.getElementById("navLinks");
 
@@ -128,23 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.setAttribute("aria-expanded", String(isOpen));
     });
 
-    // Close nav when a link is clicked (mobile UX)
     navLinks.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", () => closeNav());
     });
 
-    // Close when clicking outside
     document.addEventListener("click", (e) => {
       if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) closeNav();
     });
 
-    // Close on ESC
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeNav();
     });
   }
 
-  // 9) Project filters (NEW)
+  // 9) Project filters
   const filterButtons = document.querySelectorAll(".filter-btn");
   const projectCards = document.querySelectorAll(".project-card[data-category]");
 
@@ -169,18 +158,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const filter = (btn.dataset.filter || "all").toLowerCase();
         applyFilter(filter);
 
-        // Refresh AOS layout after filtering
         if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
           setTimeout(() => AOS.refresh(), 50);
         }
       });
     });
 
-    // default
     applyFilter("all");
   }
 
-  // 10) Refresh AOS on resize
+  // 10) Hiking stats (auto-count + latest)
+  const hikeCards = document.querySelectorAll(".hike-card[data-date]");
+  const hikeCountEl = document.getElementById("hikeCount");
+  const latestHikeEl = document.getElementById("latestHike");
+
+  if (hikeCards.length && hikeCountEl && latestHikeEl) {
+    hikeCountEl.textContent = String(hikeCards.length);
+
+    const dates = [...hikeCards]
+      .map((c) => c.dataset.date)
+      .filter(Boolean)
+      .sort(); // YYYY-MM-DD sorts naturally
+
+    const latest = dates[dates.length - 1];
+    latestHikeEl.textContent = latest ? latest : "—";
+  }
+
+  // 11) Refresh AOS on resize
   window.addEventListener(
     "resize",
     debounce(() => {
