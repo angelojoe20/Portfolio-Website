@@ -774,13 +774,12 @@
         <div class="container">
           <div class="hiking-header">
             <h2 class="section-heading">Hiking</h2>
-            <p class="section-subtitle">Mountains I’ve completed so far — one climb at a time ⛰️</p>
           </div>
 
           <div class="hike-stats" aria-label="Hiking stats">
             <div class="stat-card">
               <p class="stat-label">Completed Mountains</p>
-              <p class="stat-value" id="hikeCount">0</p>
+              <p class="stat-value" id="hikeCount">—</p>
             </div>
             <div class="stat-card">
               <p class="stat-label">Latest Hike</p>
@@ -793,26 +792,37 @@
           </div>
 
           <div class="hike-grid" id="hikeGrid">
+            <!-- Mt. Ulap (Instagram post) -->
             <article class="hike-card" data-date="2026-02-01">
-              <img src="images/hikes/sample1.jpg" alt="Mt. Example photo" class="hike-image" loading="lazy" />
+              <div class="hike-embed">
+                <blockquote
+                  class="instagram-media"
+                  data-instgrm-permalink="https://www.instagram.com/p/DU5cY1Hk5PX/?utm_source=ig_embed&amp;utm_campaign=loading"
+                  data-instgrm-version="14"
+                ></blockquote>
+              </div>
+
               <div class="hike-content">
                 <div class="hike-top">
-                  <h3>Mt. Example</h3>
+                  <h3>Mt. Tenglawan</h3>
                   <span class="hike-badge">Completed</span>
                 </div>
-                <p class="hike-meta">📍 Rizal • Difficulty: Moderate • Trail: Dayhike</p>
-                <p class="hike-desc">Sunrise trek + sea of clouds. Great trail and fun camp vibes.</p>
+
+                <p class="hike-meta">Bakun, Benguet • Difficulty: Hard • Trail: Dayhike</p>
                 <div class="hike-tags">
-                  <span class="tag">Dayhike</span>
-                  <span class="tag">Sunrise</span>
-                  <span class="tag">Moderate</span>
+                  <span class="tag">Mother Mountain</span>
+                  <span class="tag">Major Hike</span>
                 </div>
-                <a class="btn-link" href="#" target="_blank" rel="noreferrer">View Photos →</a>
+
+                <a class="btn-link" href="https://www.instagram.com/p/DU5cY1Hk5PX/" target="_blank" rel="noreferrer">
+                  View Photos →
+                </a>
               </div>
             </article>
 
+            <!-- Example 2 (image-based hike card) -->
             <article class="hike-card" data-date="2025-08-15">
-              <img src="images/hikes/sample2.jpg" alt="Mt. Sample photo" class="hike-image" loading="lazy" />
+              <img src="images/hikes/sample2.jpg" alt="Mountain hike photo" class="hike-image" loading="lazy" />
               <div class="hike-content">
                 <div class="hike-top">
                   <h3>Mt. Sample</h3>
@@ -820,10 +830,12 @@
                 </div>
                 <p class="hike-meta">📍 Batangas • Difficulty: Easy • Trail: Dayhike</p>
                 <p class="hike-desc">Chill trail with a super scenic summit view. Perfect weekend climb.</p>
+
                 <div class="hike-tags">
                   <span class="tag">Easy</span>
                   <span class="tag">Weekend</span>
                 </div>
+
                 <a class="btn-link" href="#" target="_blank" rel="noreferrer">View Photos →</a>
               </div>
             </article>
@@ -874,6 +886,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.8.0/tsparticles.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <!-- Instagram Embed (load once) -->
+    <script async src="https://www.instagram.com/embed.js"></script>
 
     <!-- Custom JS -->
     <script src="assets/script.js"></script>

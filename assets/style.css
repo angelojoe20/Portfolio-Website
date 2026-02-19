@@ -837,7 +837,10 @@ img { max-width: 100%; display: block; }
 .btn-link:hover { opacity: 0.85; }
 
 /* ===== Hiking ===== */
-.hiking-header { text-align: left; margin-bottom: 1.2rem; }
+.hiking-header {
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
 
 .hike-stats {
   display: grid;
@@ -851,7 +854,7 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1rem 1rem 0.9rem;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
 }
 
 .stat-label {
@@ -872,6 +875,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
+  align-items: stretch;
 }
 
 .hike-card {
@@ -879,8 +883,10 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .hike-card:hover {
@@ -888,6 +894,7 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow);
 }
 
+/* Image-based hike header */
 .hike-image {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -895,11 +902,50 @@ img { max-width: 100%; display: block; }
   border-bottom: 1px solid var(--border);
 }
 
+/* Instagram embed header (make it behave like an image header) */
+.hike-embed {
+  padding: 0; /* edge-to-edge like an image */
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+
+  /* match your image card proportions */
+  aspect-ratio: 16 / 10;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+
+  background: #fff;
+}
+
+/* The blockquote should fill the container */
+.hike-embed blockquote.instagram-media {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+}
+
+/* Instagram injects an iframe — force it to stretch */
+.hike-embed iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  min-width: 100% !important;
+}
+
+/* Extra: sometimes IG wraps with divs — keep everything responsive */
+.hike-embed * {
+  max-width: 100% !important;
+}
+
 .hike-content {
   padding: 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  flex: 1;
 }
 
 .hike-top {
@@ -921,8 +967,8 @@ img { max-width: 100%; display: block; }
   align-items: center;
   padding: 0.22rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid rgba(17,24,39,0.12);
-  background: rgba(17,24,39,0.04);
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(17, 24, 39, 0.04);
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 800;
@@ -939,6 +985,20 @@ img { max-width: 100%; display: block; }
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.55;
+}
+
+/* Tags inside hike card */
+.hike-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 720px) {
+  .hike-stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== Footer ===== */

@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7) Navbar show/hide (safer: show after hero, keep visible while scrolling)
+  // 7) Navbar show/hide
   const nav = document.querySelector(".navbar");
   const heroSection = document.getElementById("home");
 
@@ -167,21 +167,33 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilter("all");
   }
 
-  // 10) Hiking stats (auto-count + latest)
+  // 10) Hiking stats (auto-count + latest date) + Instagram reprocess
   const hikeCards = document.querySelectorAll(".hike-card[data-date]");
   const hikeCountEl = document.getElementById("hikeCount");
   const latestHikeEl = document.getElementById("latestHike");
+
+  const formatDate = (iso) => {
+    const [y, m, d] = (iso || "").split("-").map(Number);
+    if (!y || !m || !d) return iso || "—";
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    return dt.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  };
 
   if (hikeCards.length && hikeCountEl && latestHikeEl) {
     hikeCountEl.textContent = String(hikeCards.length);
 
     const dates = [...hikeCards]
-      .map((c) => c.dataset.date)
+      .map((c) => (c.dataset.date || "").trim())
       .filter(Boolean)
-      .sort(); // YYYY-MM-DD sorts naturally
+      .sort((a, b) => new Date(a) - new Date(b));
 
     const latest = dates[dates.length - 1];
-    latestHikeEl.textContent = latest ? latest : "—";
+    latestHikeEl.textContent = latest ? formatDate(latest) : "—";
+  }
+
+  // If instagram embed script is loaded, request reprocess (safe call)
+  if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+    window.instgrm.Embeds.process();
   }
 
   // 11) Refresh AOS on resize
