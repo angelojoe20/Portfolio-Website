@@ -1,10 +1,10 @@
 // assets/script.js
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) Reduced-motion helper
+  // Reduced-motion helper
   const prefersReducedMotion = () =>
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // 2) Debounce helper
+  // Debounce helper
   const debounce = (fn, ms) => {
     let t;
     return (...args) => {
@@ -13,12 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   };
 
-  // 3) Initialize AOS
+  // Footer year
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // Initialize AOS
   if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
     AOS.init({ duration: 700, once: false, offset: 80 });
   }
 
-  // 4) Typed.js rotating subtitle
+  // Typed.js rotating subtitle
   const typedTarget = document.getElementById("typed-text");
   if (typedTarget && typeof Typed !== "undefined" && !prefersReducedMotion()) {
     // eslint-disable-next-line no-new
@@ -39,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     typedTarget.textContent = "Building cloud-ready systems and DevOps solutions.";
   }
 
-  // 5) tsParticles (HERO only — calmer, premium)
+  // tsParticles (HERO)
   if (window.tsParticles && !prefersReducedMotion()) {
     const heroParticlesEl = document.getElementById("particles-js");
     if (heroParticlesEl) {
@@ -47,20 +51,20 @@ document.addEventListener("DOMContentLoaded", () => {
         particles: {
           number: {
             value: window.innerWidth > 768 ? 55 : 25,
-            density: { enable: true, value_area: 900 }
+            density: { enable: true, area: 900 }
           },
-          color: { value: "#ffffff" },
+          color: { value: "#111827" },
           shape: { type: "circle" },
-          opacity: { value: 0.22, random: true },
+          opacity: { value: 0.12, random: true },
           size: { value: 2.2, random: true },
           links: {
             enable: true,
             distance: 160,
-            color: "#ffffff",
-            opacity: 0.10,
+            color: "#111827",
+            opacity: 0.06,
             width: 1
           },
-          move: { enable: true, speed: 0.8, outModes: "out" }
+          move: { enable: true, speed: 0.7, outModes: "out" }
         },
         interactivity: {
           detectsOn: "canvas",
@@ -69,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             onClick: { enable: false }
           },
           modes: {
-            grab: { distance: 140, links: { opacity: 0.18 } }
+            grab: { distance: 140, links: { opacity: 0.12 } }
           }
         },
         detectRetina: true
@@ -77,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 6) VanillaTilt (cards + about image)
+  // VanillaTilt
   if (window.VanillaTilt && !prefersReducedMotion()) {
     const tiltElems = document.querySelectorAll("[data-tilt]");
     if (tiltElems.length) {
@@ -90,22 +94,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7) Navbar show/hide
+  // Navbar show/hide (with fallback)
   const nav = document.querySelector(".navbar");
   const heroSection = document.getElementById("home");
 
   if (nav && heroSection) {
-    new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) nav.classList.remove("visible");
-          else nav.classList.add("visible");
-        }),
-      { threshold: 0.2 }
-    ).observe(heroSection);
+    if (!("IntersectionObserver" in window)) {
+      nav.classList.add("visible");
+    } else {
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) nav.classList.remove("visible");
+            else nav.classList.add("visible");
+          });
+        },
+        { threshold: 0.2 }
+      ).observe(heroSection);
+    }
   }
 
-  // 8) Mobile nav toggle
+  // Mobile nav toggle
   const navToggle = document.getElementById("navToggle");
   const navLinks = document.getElementById("navLinks");
 
@@ -118,10 +127,11 @@ document.addEventListener("DOMContentLoaded", () => {
     navToggle.addEventListener("click", () => {
       const isOpen = navLinks.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) navLinks.querySelector("a")?.focus();
     });
 
     navLinks.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => closeNav());
+      a.addEventListener("click", closeNav);
     });
 
     document.addEventListener("click", (e) => {
@@ -133,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 9) Project filters
+  // Project filters (tabs)
   const filterButtons = document.querySelectorAll(".filter-btn");
   const projectCards = document.querySelectorAll(".project-card[data-category]");
 
@@ -152,8 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     filterButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        filterButtons.forEach((b) => b.classList.remove("is-active"));
+        filterButtons.forEach((b) => {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
+        });
+
         btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
 
         const filter = (btn.dataset.filter || "all").toLowerCase();
         applyFilter(filter);
@@ -167,16 +182,26 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilter("all");
   }
 
-  // 10) Hiking stats (auto-count + latest date) + Instagram reprocess
+  // Hiking stats (UTC-safe sorting)
   const hikeCards = document.querySelectorAll(".hike-card[data-date]");
   const hikeCountEl = document.getElementById("hikeCount");
   const latestHikeEl = document.getElementById("latestHike");
 
-  const formatDate = (iso) => {
+  const toUTC = (iso) => {
     const [y, m, d] = (iso || "").split("-").map(Number);
-    if (!y || !m || !d) return iso || "—";
-    const dt = new Date(Date.UTC(y, m - 1, d));
-    return dt.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+    if (!y || !m || !d) return NaN;
+    return Date.UTC(y, m - 1, d);
+  };
+
+  const formatDate = (iso) => {
+    const utc = toUTC(iso);
+    if (!utc) return iso || "—";
+    const dt = new Date(utc);
+    return dt.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    });
   };
 
   if (hikeCards.length && hikeCountEl && latestHikeEl) {
@@ -185,18 +210,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const dates = [...hikeCards]
       .map((c) => (c.dataset.date || "").trim())
       .filter(Boolean)
-      .sort((a, b) => new Date(a) - new Date(b));
+      .sort((a, b) => toUTC(a) - toUTC(b));
 
     const latest = dates[dates.length - 1];
     latestHikeEl.textContent = latest ? formatDate(latest) : "—";
   }
 
-  // If instagram embed script is loaded, request reprocess (safe call)
-  if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
-    window.instgrm.Embeds.process();
+  // Instagram embed reprocess (handles cases where embed.js loads after DOMContentLoaded)
+  const processInstagramEmbeds = () => {
+    if (
+      window.instgrm &&
+      window.instgrm.Embeds &&
+      typeof window.instgrm.Embeds.process === "function"
+    ) {
+      window.instgrm.Embeds.process();
+      return true;
+    }
+    return false;
+  };
+
+  // Try now, then retry a few times if embed.js loads late
+  if (!processInstagramEmbeds()) {
+    let tries = 0;
+    const maxTries = 10;
+    const interval = setInterval(() => {
+      tries += 1;
+      const ok = processInstagramEmbeds();
+      if (ok || tries >= maxTries) clearInterval(interval);
+    }, 500);
   }
 
-  // 11) Refresh AOS on resize
+  // Refresh AOS on resize
   window.addEventListener(
     "resize",
     debounce(() => {
