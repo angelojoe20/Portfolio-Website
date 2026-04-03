@@ -108,6 +108,7 @@ img { max-width: 100%; display: block; }
   transition: color 0.2s ease;
 }
 .nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--text); font-weight: 700; }
 
 .nav-toggle {
   display: none;
@@ -332,7 +333,8 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow);
 }
 
-.about-me-description { color: var(--muted); }
+.about-me-description { color: var(--muted); text-align: justify; }
+.about-actions { margin-top: 1.5rem; }
 .highlight { color: var(--text); font-weight: 700; }
 .about-me-image-container { display: flex; justify-content: center; }
 .about-me-avatar {
@@ -379,6 +381,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.85rem;
 }
 .skill-item img { width: 28px; height: 28px; object-fit: contain; }
+.skill-item img.icon-dark { filter: brightness(0); }
 .skill-item span { color: var(--muted); font-size: 0.95rem; }
 
 /* ===== Experience (Notion log) ===== */
@@ -665,7 +668,8 @@ img { max-width: 100%; display: block; }
 }
 
 .cert-card:hover .flip-inner,
-.cert-card:focus-within .flip-inner { transform: rotateY(180deg); }
+.cert-card:focus-within .flip-inner,
+.cert-card.flipped .flip-inner { transform: rotateY(180deg); }
 
 .flip-front,
 .flip-back {
@@ -741,7 +745,8 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   .flip-inner { transition: none; transform: none !important; }
   .cert-card:hover .flip-inner,
-  .cert-card:focus-within .flip-inner { transform: none !important; }
+  .cert-card:focus-within .flip-inner,
+  .cert-card.flipped .flip-inner { transform: none !important; }
   .scroll-indicator img { animation: none; }
 }
 

@@ -114,6 +114,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Active nav link highlighting on scroll
+  const navLinkEls = document.querySelectorAll(".nav-links a[href^='#']");
+  const sectionIds = [...navLinkEls].map((a) => a.getAttribute("href").slice(1));
+  const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+
+  if (sections.length && navLinkEls.length) {
+    const setActive = (id) => {
+      navLinkEls.forEach((a) => {
+        a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
+      });
+    };
+
+    new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { threshold: 0.3, rootMargin: "-60px 0px -40% 0px" }
+    ).observe && sections.forEach((s) =>
+      new IntersectionObserver(
+        (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }); },
+        { threshold: 0.3, rootMargin: "-60px 0px -40% 0px" }
+      ).observe(s)
+    );
+  }
+
+  // Mobile tap-to-flip for cert cards
+  document.querySelectorAll(".cert-card.flip-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
+  });
+
   // Mobile nav toggle
   const navToggle = document.getElementById("navToggle");
   const navLinks = document.getElementById("navLinks");
