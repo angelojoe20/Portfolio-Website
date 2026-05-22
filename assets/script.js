@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     new Typed("#typed-text", {
       strings: [
         "Building cloud-ready systems and DevOps solutions.",
-        "Computer Engineering student focused on Cloud & DevOps.",
+        "Computer Engineering graduate focused on Cloud & DevOps.",
         "Open to collaborations — let’s build something."
       ],
       typeSpeed: 55,
@@ -140,13 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ).observe(s)
     );
   }
-
-  // Mobile tap-to-flip for cert cards
-  document.querySelectorAll(".cert-card.flip-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      card.classList.toggle("flipped");
-    });
-  });
 
   // Mobile nav toggle
   const navToggle = document.getElementById("navToggle");
@@ -263,7 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return false;
   };
 
-  // Try now, then retry a few times if embed.js loads late
   if (!processInstagramEmbeds()) {
     let tries = 0;
     const maxTries = 10;
