@@ -25,6 +25,14 @@
 
     <!-- <link rel="manifest" href="manifest.json" /> -->
 
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Angelo" />
+    <link rel="apple-touch-icon" href="images/icon.png" />
+
     <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
@@ -44,16 +52,21 @@
       <nav class="navbar" role="navigation" aria-label="Primary">
         <div class="nav-logo">
           <a href="#home" aria-label="Go to top">Angelo</a>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <span class="theme-icon">🌙</span>
+          </button>
         </div>
 
-        <button
-          class="nav-toggle"
-          id="navToggle"
-          aria-label="Toggle navigation"
-          aria-expanded="false"
-        >
-          ☰
-        </button>
+        <div class="nav-right">
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
 
         <ul id="navLinks" class="nav-links">
           <li><a href="#about-me">About</a></li>
@@ -62,6 +75,7 @@
           <li><a href="#certifications">Certifications</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#hiking">Hiking</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 
@@ -209,26 +223,26 @@
               <div class="skill-item"><img src="images/flutter.png" alt="Flutter" /><span>Flutter</span></div>
               <div class="skill-item"><img src="images/javascript.png" alt="JavaScript" /><span>JavaScript</span></div>
               <div class="skill-item"><img src="images/cplusplus.png" alt="C++" /><span>C++</span></div>
-              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" /><span>Next.js</span></div>
-              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" class="icon-dark" /><span>FastAPI</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" class="icon-dark" /><span>Next.js</span></div>
             </div>
 
             <div class="skill-column" data-aos="fade-up" data-aos-delay="250">
               <h3>Cloud</h3>
               <div class="skill-item"><img src="images/amazonwebservices.png" alt="AWS" /><span>AWS</span></div>
               <div class="skill-item"><img src="images/googlecloud.png" alt="Google Cloud" /><span>Google Cloud</span></div>
-              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Microsoft Azure" class="icon-dark" /><span>Microsoft Azure</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Microsoft Azure" /><span>Microsoft Azure</span></div>
             </div>
 
             <div class="skill-column" data-aos="fade-up" data-aos-delay="350">
               <h3>Tools</h3>
               <div class="skill-item"><img src="images/git.png" alt="Git" /><span>Git</span></div>
               <div class="skill-item"><img src="images/github.png" alt="GitHub" /><span>GitHub</span></div>
-              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab" class="icon-dark" /><span>GitLab</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab" /><span>GitLab</span></div>
               <div class="skill-item"><img src="images/docker.png" alt="Docker" /><span>Docker</span></div>
               <div class="skill-item"><img src="images/nginx.png" alt="Nginx" /><span>Nginx</span></div>
-              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/apachejmeter.svg" alt="JMeter" class="icon-dark" /><span>JMeter</span></div>
-              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/postman.svg" alt="Postman" class="icon-dark" /><span>Postman</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachejmeter/apachejmeter-original.svg" alt="JMeter" /><span>JMeter</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" /><span>Postman</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" /><span>Terraform</span></div>
             </div>
 
             <div class="skill-column" data-aos="fade-up" data-aos-delay="450">
@@ -236,16 +250,22 @@
               <div class="skill-item"><img src="images/mysql.png" alt="MySQL" /><span>MySQL</span></div>
               <div class="skill-item"><img src="images/sqlite.png" alt="SQLite" /><span>SQLite</span></div>
               <div class="skill-item"><img src="images/postgresql.png" alt="PostgreSQL" /><span>PostgreSQL</span></div>
-              <div class="skill-item"><img src="images/firebase.png" alt="Firebase" /><span>Firebase</span></div>
             </div>
 
+            <div class="skill-column" data-aos="fade-up" data-aos-delay="650">
+              <h3>Project Management</h3>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" /><span>Jira</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/confluence/confluence-original.svg" alt="Confluence" /><span>Confluence</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="Trello" /><span>Trello</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/clickup.svg" alt="ClickUp" class="icon-dark" /><span>ClickUp</span></div>
+            </div>
             <div class="skill-column" data-aos="fade-up" data-aos-delay="550">
               <h3>SaaS & Enterprise</h3>
               <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/veeam.svg" alt="Veeam" class="icon-dark" /><span>Veeam</span></div>
-              <div class="skill-item"><img src="https://www.google.com/s2/favicons?domain=odoo.com&sz=64" alt="Odoo" class="icon-dark" /><span>Odoo</span></div>
-              <div class="skill-item"><img src="https://www.google.com/s2/favicons?domain=ibm.com&sz=64" alt="IBM" class="icon-dark" /><span>IBM</span></div>
-              <div class="skill-item"><img src="https://www.google.com/s2/favicons?domain=manageengine.com&sz=64" alt="ManageEngine" class="icon-dark" /><span>ManageEngine</span></div>
-              <div class="skill-item"><img src="https://www.google.com/s2/favicons?domain=successfactors.com&sz=64" alt="HRIS" class="icon-dark" /><span>HRIS</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/odoo.svg" alt="Odoo" class="icon-dark" /><span>Odoo</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/ibm.svg" alt="IBM" class="icon-dark" /><span>IBM</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/zoho.svg" alt="ManageEngine" class="icon-dark" /><span>ManageEngine</span></div>
+              <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/sap.svg" alt="HRIS" class="icon-dark" /><span>HRIS</span></div>
             </div>
           </div>
         </div>
@@ -284,12 +304,10 @@
                         Cloud Engineer Level III <span class="role-dates">· May 2026 – Present</span>
                       </h4>
                       <ul class="role-list">
-                        <li>Provision AWS cloud infrastructure and analytics platform services for enterprise and financial services environments.</li>
-                        <li>Support Infrastructure-as-Code initiatives using Terraform for cloud resource provisioning and environment setup.</li>
-                        <li>Assist in implementing ETL analytics environments using AWS services such as S3, Glue, Athena, IAM, and related cloud services.</li>
-                        <li>Collaborate with Cloud, Data, and Engineering teams on infrastructure automation, IAM governance, and deployment activities.</li>
-                        <li>Participate in enterprise client engagements, technical discussions, and cloud implementation activities in fast-paced delivery environments.</li>
-                        <li>Support cloud cost optimization, operational improvements, and AWS best practices aligned with enterprise security and governance standards.</li>
+                        <li>Provision and manage AWS cloud infrastructure for enterprise clients across financial services and food industry sectors.</li>
+                        <li>Support cloud infrastructure, network & security remediation, and cost optimization through the AWS Well-Architected Framework.</li>
+                        <li>Drive IaC initiatives using Terraform and implement ETL analytics environments with AWS S3, Glue, Athena, and IAM.</li>
+                        <li>Collaborate with cross-functional teams on infrastructure automation, IAM governance, and enterprise cloud delivery.</li>
                       </ul>
                     </div>
                   </div>
@@ -317,7 +335,7 @@
             <!-- Valueline -->
             <article class="exp-item" data-aos="fade-up" data-aos-delay="50" data-tilt data-tilt-max="6">
               <div class="exp-meta">
-                <span class="exp-dates">May 2025 – Present</span>
+                <span class="exp-dates">May 2025 – May 2026</span>
               </div>
 
               <div class="exp-card">
@@ -328,7 +346,7 @@
                   <div class="exp-headings">
                     <h3>Valueline System Solutions Corporation</h3>
                     <p class="exp-role">
-                      Solutions Architect (Jan 2026 – Present) · Presales Engineer (May 2025 – Dec 2025)
+                      Solutions Architect (Jan 2026 – May 2026) · Presales Engineer (May 2025 – Dec 2025)
                     </p>
                   </div>
                 </header>
@@ -337,7 +355,7 @@
                   <div class="role-split">
                     <div class="role-block">
                       <h4 class="role-title">
-                        Solutions Architect <span class="role-dates">· Jan 2026 – Present</span>
+                        Solutions Architect <span class="role-dates">· Jan 2026 – May 2026</span>
                       </h4>
                       <ul class="role-list">
                         <li>Design secure, scalable, cost-efficient cloud, hybrid, and on-premises architectures.</li>
@@ -618,7 +636,9 @@
           <h2 class="section-heading">Certifications</h2>
           <p class="section-subtitle">Credential proof, dates, and verification links surfaced upfront for quick scanning.</p>
 
-          <div class="certifications-grid">
+          <div class="cert-group">
+            <p class="cert-group-label">Amazon Web Services</p>
+            <div class="certifications-grid">
             <article class="cert-card" data-aos="fade-up" data-aos-delay="50">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
@@ -675,33 +695,7 @@
               </div>
             </article>
 
-            <article class="cert-card" data-aos="fade-up" data-aos-delay="250">
-              <div class="cert-mark">OCI</div>
-              <div class="cert-info">
-                <p class="cert-level">AI Foundations</p>
-                <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
-                <p class="cert-dates">Expires Oct 27, 2027</p>
-                <p class="cert-summary">Covers foundational AI and machine learning concepts with practical application in Oracle Cloud Infrastructure.</p>
-              </div>
-              <div class="cert-actions">
-                <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D047FA9780F0BB431AB8C313A8B2548F28AAEA3D8A5D9BCAC42E71CBEFE5F049" class="btn btn-primary" target="_blank" rel="noreferrer">Verify</a>
-              </div>
-            </article>
-
-            <article class="cert-card" data-aos="fade-up" data-aos-delay="300">
-              <div class="cert-mark">IBM</div>
-              <div class="cert-info">
-                <p class="cert-level">Foundational</p>
-                <h3>watsonx Orchestrate Sales Foundation</h3>
-                <p class="cert-dates">Issued Sep 5, 2025 · Expires Sep 5, 2026</p>
-                <p class="cert-summary">Validated foundational knowledge of IBM watsonx Orchestrate, customer conversations, business pain points, skills, and integrations.</p>
-              </div>
-              <div class="cert-actions">
-                <a href="https://www.credly.com/badges/b1119c97-d236-4a5d-8ff9-c346d98328c1/public_url" class="btn btn-primary" target="_blank" rel="noreferrer">Verify</a>
-              </div>
-            </article>
-
-            <article class="cert-card cert-card-featured" data-aos="fade-up" data-aos-delay="350">
+            <article class="cert-card cert-card-featured" data-aos="fade-up" data-aos-delay="250">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
                 <p class="cert-level">Professional</p>
@@ -714,6 +708,38 @@
                 <a href="images/AWS SAP.pdf" class="btn btn-secondary" download>PDF</a>
               </div>
             </article>
+            </div>
+          </div>
+
+          <div class="cert-group">
+            <p class="cert-group-label">Oracle &amp; IBM</p>
+            <div class="certifications-grid">
+              <article class="cert-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="cert-mark">OCI</div>
+                <div class="cert-info">
+                  <p class="cert-level">AI Foundations</p>
+                  <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
+                  <p class="cert-dates">Expires Oct 27, 2027</p>
+                  <p class="cert-summary">Covers foundational AI and machine learning concepts with practical application in Oracle Cloud Infrastructure.</p>
+                </div>
+                <div class="cert-actions">
+                  <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D047FA9780F0BB431AB8C313A8B2548F28AAEA3D8A5D9BCAC42E71CBEFE5F049" class="btn btn-primary" target="_blank" rel="noreferrer">Verify</a>
+                </div>
+              </article>
+
+              <article class="cert-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="cert-mark">IBM</div>
+                <div class="cert-info">
+                  <p class="cert-level">Foundational</p>
+                  <h3>watsonx Orchestrate Sales Foundation</h3>
+                  <p class="cert-dates">Issued Sep 5, 2025 · Expires Sep 5, 2026</p>
+                  <p class="cert-summary">Validated foundational knowledge of IBM watsonx Orchestrate, customer conversations, business pain points, skills, and integrations.</p>
+                </div>
+                <div class="cert-actions">
+                  <a href="https://www.credly.com/badges/b1119c97-d236-4a5d-8ff9-c346d98328c1/public_url" class="btn btn-primary" target="_blank" rel="noreferrer">Verify</a>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -832,7 +858,7 @@
 
     <div class="hike-stats" aria-label="Hiking stats">
       <div class="stat-card">
-        <p class="stat-label">Completed Mountains</p>
+        <p class="stat-label">Peaks Summited</p>
         <p class="stat-value" id="hikeCount">—</p>
       </div>
       <div class="stat-card">
@@ -841,7 +867,7 @@
       </div>
       <div class="stat-card">
         <p class="stat-label">Goal</p>
-        <p class="stat-value">12+</p>
+        <p class="stat-value">20+</p>
       </div>
     </div>
 
@@ -995,6 +1021,7 @@
             <div class="hike-tags">
               <span class="tag">Major Hike</span>
               <span class="tag">Quadpeak</span>
+              <span class="tag">4 Peaks</span>
             </div>
 
             <a
@@ -1007,6 +1034,120 @@
             </a>
           </div>
         </article>
+
+        <article class="hike-card" data-date="2026-06-07">
+          <div class="hike-embed">
+            <blockquote
+              class="instagram-media"
+              data-instgrm-captioned
+              data-instgrm-permalink="https://www.instagram.com/p/DZSekVREyVM/?utm_source=ig_embed&amp;utm_campaign=loading"
+              data-instgrm-version="14"
+            ></blockquote>
+          </div>
+          <div class="hike-content">
+            <div class="hike-top">
+              <h3>Mt. Mariglem</h3>
+              <span class="hike-badge">Completed</span>
+            </div>
+            <p class="hike-meta">Philippines • Difficulty: Moderate • Trail: Dayhike</p>
+            <div class="hike-tags">
+              <span class="tag">Minor Hike</span>
+            </div>
+            <a class="btn-link" href="https://www.instagram.com/p/DZSekVREyVM/" target="_blank" rel="noreferrer">View Photos →</a>
+          </div>
+        </article>
+
+        <article class="hike-card" data-date="2026-06-12">
+          <div class="hike-embed">
+            <blockquote
+              class="instagram-media"
+              data-instgrm-captioned
+              data-instgrm-permalink="https://www.instagram.com/p/DZl9DpFk8jN/?utm_source=ig_embed&amp;utm_campaign=loading"
+              data-instgrm-version="14"
+            ></blockquote>
+          </div>
+          <div class="hike-content">
+            <div class="hike-top">
+              <h3>Mt. Paminitian</h3>
+              <span class="hike-badge">Completed</span>
+            </div>
+            <p class="hike-meta">Philippines • Difficulty: Moderate • Trail: Dayhike</p>
+            <div class="hike-tags">
+              <span class="tag">Minor Hike</span>
+            </div>
+            <a class="btn-link" href="https://www.instagram.com/p/DZl9DpFk8jN/" target="_blank" rel="noreferrer">View Photos →</a>
+          </div>
+        </article>
+
+        <article class="hike-card" data-date="2026-06-27">
+          <div class="hike-embed">
+            <blockquote
+              class="instagram-media"
+              data-instgrm-captioned
+              data-instgrm-permalink="https://www.instagram.com/p/DaP4ZnNky9K/?utm_source=ig_embed&amp;utm_campaign=loading"
+              data-instgrm-version="14"
+            ></blockquote>
+          </div>
+          <div class="hike-content">
+            <div class="hike-top">
+              <h3>Kayapa Quadpeak</h3>
+              <span class="hike-badge">Completed</span>
+            </div>
+            <p class="hike-meta">Kayapa, Nueva Vizcaya • Difficulty: Hard • Trail: Quadpeak</p>
+            <div class="hike-tags">
+              <span class="tag">Major Hike</span>
+              <span class="tag">Quadpeak</span>
+              <span class="tag">4 Peaks</span>
+            </div>
+            <a class="btn-link" href="https://www.instagram.com/p/DaP4ZnNky9K/" target="_blank" rel="noreferrer">View Photos →</a>
+          </div>
+        </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Contact ====== -->
+<section id="contact" class="contact-section" data-aos="fade-up">
+  <div class="container">
+    <h2 class="section-heading">Contact</h2>
+    <p class="section-subtitle">Open to opportunities, collaborations, and cloud conversations.</p>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p>Whether you're looking for a cloud engineer, want to collaborate on a project, or just want to connect — feel free to reach out. I'll get back to you as soon as I can.</p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/angelo-joe-delos-santos-535627283/" class="contact-link" target="_blank" rel="noreferrer">
+            <img src="images/linkedin.png" alt="LinkedIn" /> linkedin.com/in/angelo-joe-delos-santos
+          </a>
+          <a href="https://github.com/angelojoe20" class="contact-link" target="_blank" rel="noreferrer">
+            <img src="images/github.png" alt="GitHub" /> github.com/angelojoe20
+          </a>
+          <a href="https://www.instagram.com/https.geloo_/" class="contact-link" target="_blank" rel="noreferrer">
+            <img src="images/instagram.png" alt="Instagram" /> @https.geloo_
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactSubject">Subject</label>
+          <input type="text" id="contactSubject" name="subject" placeholder="What's this about?" />
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" rows="5" placeholder="Your message..." required></textarea>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
     </div>
   </div>
 </section>
@@ -1014,39 +1155,32 @@
     <!-- ====== Footer ====== -->
     <footer class="footer" role="contentinfo">
       <div class="container">
-        <p>&copy; <span id="year"></span> Angelo Joe Delos Santos. All rights reserved.</p>
-
+        <p class="footer-cta">Open to opportunities · Let's build something great.</p>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#about-me">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#projects">Projects</a>
+          <a href="#hiking">Hiking</a>
+          <a href="#contact">Contact</a>
+        </nav>
         <div class="footer-socials" aria-label="Footer social links">
-          <a
-            href="https://www.linkedin.com/in/angelo-joe-delos-santos-535627283/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-            class="icon-btn"
-          >
+          <a href="https://www.linkedin.com/in/angelo-joe-delos-santos-535627283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="icon-btn">
             <img src="images/linkedin.png" alt="LinkedIn" loading="lazy" />
           </a>
-          <a
-            href="https://github.com/angelojoe20"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-            class="icon-btn"
-          >
+          <a href="https://github.com/angelojoe20" target="_blank" rel="noreferrer" aria-label="GitHub" class="icon-btn">
             <img src="images/github.png" alt="GitHub" loading="lazy" />
           </a>
-          <a
-            href="https://www.instagram.com/https.geloo_/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-            class="icon-btn"
-          >
+          <a href="https://www.instagram.com/https.geloo_/" target="_blank" rel="noreferrer" aria-label="Instagram" class="icon-btn">
             <img src="images/instagram.png" alt="Instagram" loading="lazy" />
           </a>
         </div>
+        <p>&copy; <span id="year"></span> Angelo Joe Delos Santos. All rights reserved.</p>
       </div>
     </footer>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top" title="Back to top">↑</button>
 
     <!-- External JS Libraries -->
     <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

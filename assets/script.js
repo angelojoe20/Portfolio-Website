@@ -17,6 +17,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+  // Dark mode toggle
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = themeToggle?.querySelector(".theme-icon");
+  const savedTheme = localStorage.getItem("theme") ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (themeIcon) themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+    localStorage.setItem("theme", theme);
+  };
+
+  applyTheme(savedTheme);
+
+  themeToggle?.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  });
+
+  // Scroll to top
+  const scrollTopBtn = document.getElementById("scrollTop");
+  if (scrollTopBtn) {
+    window.addEventListener("scroll", () => {
+      scrollTopBtn.classList.toggle("visible", window.scrollY > 400);
+    }, { passive: true });
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   // Initialize AOS
   if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
     AOS.init({ duration: 700, once: false, offset: 80 });
@@ -232,7 +262,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   if (hikeCards.length && hikeCountEl && latestHikeEl) {
-    hikeCountEl.textContent = String(hikeCards.length);
+    // Count actual peaks: quadpeak cards = 4 peaks each, others = 1
+    const totalPeaks = [...hikeCards].reduce((sum, card) => {
+      const tags = card.querySelectorAll(".tag");
+      const isQuad = [...tags].some(t => t.textContent.includes("4 Peaks"));
+      return sum + (isQuad ? 4 : 1);
+    }, 0);
+    hikeCountEl.textContent = String(totalPeaks);
 
     const dates = [...hikeCards]
       .map((c) => (c.dataset.date || "").trim())
@@ -266,6 +302,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }
 
+  // Instagram skeleton loaders
+  document.querySelectorAll(".hike-embed blockquote.instagram-media").forEach((bq) => {
+    const wrapper = bq.closest(".hike-embed");
+    if (!wrapper) return;
+    const skeleton = document.createElement("div");
+    skeleton.className = "hike-embed-skeleton";
+    wrapper.parentNode.insertBefore(skeleton, wrapper);
+    wrapper.style.display = "none";
+    const observer = new MutationObserver(() => {
+      if (wrapper.querySelector("iframe")) {
+        skeleton.remove();
+        wrapper.style.display = "";
+        observer.disconnect();
+      }
+    });
+    observer.observe(wrapper, { childList: true, subtree: true });
+  });
+
+  // Contact form — opens mailto as fallback (no backend needed)
+  const contactForm = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+  if (contactForm && formStatus) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = contactForm.contactName?.value.trim();
+      const email = contactForm.contactEmail?.value.trim();
+      const subject = contactForm.contactSubject?.value.trim() || "Portfolio Inquiry";
+      const message = contactForm.contactMessage?.value.trim();
+      if (!name || !email || !message) {
+        formStatus.textContent = "Please fill in all required fields.";
+        formStatus.className = "form-status error";
+        return;
+      }
+      const mailto = `mailto:angelojoedelossantos20@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+      window.location.href = mailto;
+      formStatus.textContent = "Opening your email client...";
+      formStatus.className = "form-status success";
+      contactForm.reset();
+    });
+  }
+
   // Refresh AOS on resize
   window.addEventListener(
     "resize",
@@ -273,4 +350,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof AOS !== "undefined" && !prefersReducedMotion()) AOS.refresh();
     }, 200)
   );
+
+  // Register Service Worker (PWA)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    });
+  }
 });
