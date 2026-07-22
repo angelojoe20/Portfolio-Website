@@ -58,9 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // eslint-disable-next-line no-new
     new Typed("#typed-text", {
       strings: [
-        "Building cloud-ready systems and DevOps solutions.",
-        "Computer Engineering graduate focused on Cloud & DevOps.",
-        "Open to collaborations — let’s build something."
+        "Building secure infrastructure, repeatable delivery pipelines, and practical cloud solutions.",
+        "Designing AWS environments with automation, governance, and reliability in mind.",
+        "Open to cloud engineering roles, collaborations, and systems-focused work."
       ],
       typeSpeed: 55,
       backSpeed: 14,
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cursorChar: "|"
     });
   } else if (typedTarget) {
-    typedTarget.textContent = "Building cloud-ready systems and DevOps solutions.";
+    typedTarget.textContent = "Building secure infrastructure, repeatable delivery pipelines, and practical cloud solutions.";
   }
 
   // tsParticles (HERO)
@@ -340,6 +340,24 @@ document.addEventListener("DOMContentLoaded", () => {
       formStatus.textContent = "Opening your email client...";
       formStatus.className = "form-status success";
       contactForm.reset();
+    });
+  }
+
+  // Copy email
+  const copyEmailBtn = document.getElementById("copyEmail");
+  if (copyEmailBtn) {
+    const originalText = copyEmailBtn.textContent;
+    copyEmailBtn.addEventListener("click", async () => {
+      const email = copyEmailBtn.dataset.email || "";
+      try {
+        await navigator.clipboard.writeText(email);
+        copyEmailBtn.textContent = "Copied";
+        setTimeout(() => {
+          copyEmailBtn.textContent = originalText;
+        }, 1600);
+      } catch {
+        window.location.href = `mailto:${email}`;
+      }
     });
   }
 
