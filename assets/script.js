@@ -369,11 +369,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200)
   );
 
-  // Register Service Worker (PWA)
+  // Remove the old PWA service worker so portfolio updates are visible immediately.
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js")
-        .then((registration) => registration.update())
+      navigator.serviceWorker.getRegistrations()
+        .then((registrations) => {
+          registrations.forEach((registration) => registration.unregister());
+        })
         .catch(() => {});
     });
   }
