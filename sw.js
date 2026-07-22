@@ -1,4 +1,4 @@
-const CACHE = "angelo-portfolio-v1";
+const CACHE = "angelo-portfolio-v3";
 const ASSETS = [
   "/",
   "/index.html",
@@ -32,13 +32,27 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET") return;
+
+  if (e.request.mode === "navigate") {
+    e.respondWith(
+      fetch(e.request)
+        .then((res) => {
+          const clone = res.clone();
+          caches.open(CACHE).then((cache) => cache.put("/index.html", clone));
+          return res;
+        })
+        .catch(() => caches.match("/index.html"))
+    );
+    return;
+  }
+
   e.respondWith(
-    caches.match(e.request).then((cached) =>
-      cached || fetch(e.request).then((res) => {
+    fetch(e.request).then((res) => {
+      if (new URL(e.request.url).origin === location.origin) {
         const clone = res.clone();
         caches.open(CACHE).then((cache) => cache.put(e.request, clone));
-        return res;
-      })
-    ).catch(() => caches.match("/index.html"))
+      }
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });

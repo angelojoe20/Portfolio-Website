@@ -508,6 +508,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
+  align-items: start;
 }
 
 .skill-column {
@@ -517,6 +518,7 @@ img { max-width: 100%; display: block; }
   padding: 1.25rem 1rem;
   box-shadow: 0 8px 22px rgba(15,23,42,0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: auto;
 }
 .skill-column:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 
