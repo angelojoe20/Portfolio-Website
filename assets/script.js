@@ -239,6 +239,46 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilter("all");
   }
 
+  // Portfolio book page controls
+  const bookPages = [
+    { id: "home", label: "Cover" },
+    { id: "snapshot", label: "Snapshot" },
+    { id: "about-me", label: "About" },
+    { id: "projects", label: "Projects" },
+    { id: "experience", label: "Experience" },
+    { id: "skills", label: "Skills" },
+    { id: "leadership", label: "Organizations" },
+    { id: "certifications", label: "Certifications" },
+    { id: "hiking", label: "Beyond Work" },
+    { id: "contact", label: "Contact" }
+  ].filter((page) => document.getElementById(page.id));
+
+  bookPages.forEach((page, index) => {
+    const section = document.getElementById(page.id);
+    const container = page.id === "home"
+      ? section?.querySelector(".hero-left")
+      : section?.querySelector(".container");
+    if (!section || !container || section.querySelector(".page-turn")) return;
+
+    const prev = bookPages[index - 1];
+    const next = bookPages[index + 1];
+    const controls = document.createElement("nav");
+    controls.className = "page-turn";
+    controls.setAttribute("aria-label", `${page.label} page navigation`);
+
+    const prevLink = document.createElement("a");
+    prevLink.href = prev ? `#${prev.id}` : "#home";
+    prevLink.textContent = prev ? `Previous: ${prev.label}` : "Previous";
+    if (!prev) prevLink.setAttribute("aria-disabled", "true");
+
+    const nextLink = document.createElement("a");
+    nextLink.href = next ? `#${next.id}` : "#home";
+    nextLink.textContent = next ? `Next: ${next.label}` : "Back to Cover";
+
+    controls.append(prevLink, nextLink);
+    container.appendChild(controls);
+  });
+
   // Hiking stats (UTC-safe sorting)
   const hikeCards = document.querySelectorAll(".hike-card[data-date]");
   const hikeCountEl = document.getElementById("hikeCount");
