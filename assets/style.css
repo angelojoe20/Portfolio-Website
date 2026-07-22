@@ -2851,6 +2851,7 @@ body {
   max-width: 11ch;
   font-size: clamp(2.8rem, 5.4vw, 5.4rem);
   line-height: 1;
+  margin-top: 0;
 }
 
 .hero-tagline {
