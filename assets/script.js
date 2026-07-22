@@ -279,45 +279,22 @@ document.addEventListener("DOMContentLoaded", () => {
     latestHikeEl.textContent = latest ? formatDate(latest) : "—";
   }
 
-  // Instagram embed reprocess (handles cases where embed.js loads after DOMContentLoaded)
-  const processInstagramEmbeds = () => {
-    if (
-      window.instgrm &&
-      window.instgrm.Embeds &&
-      typeof window.instgrm.Embeds.process === "function"
-    ) {
-      window.instgrm.Embeds.process();
-      return true;
-    }
-    return false;
-  };
+  // Stable hiking covers. Instagram embeds often fail for private/restricted posts.
+  document.querySelectorAll(".hike-card").forEach((card, index) => {
+    const embed = card.querySelector(".hike-embed");
+    const title = card.querySelector(".hike-top h3")?.textContent?.trim() || "Hike";
+    const meta = card.querySelector(".hike-meta")?.textContent?.split("•")[0]?.trim() || "Trail log";
+    const link = card.querySelector(".btn-link")?.getAttribute("href") || "#";
+    if (!embed) return;
 
-  if (!processInstagramEmbeds()) {
-    let tries = 0;
-    const maxTries = 10;
-    const interval = setInterval(() => {
-      tries += 1;
-      const ok = processInstagramEmbeds();
-      if (ok || tries >= maxTries) clearInterval(interval);
-    }, 500);
-  }
-
-  // Instagram skeleton loaders
-  document.querySelectorAll(".hike-embed blockquote.instagram-media").forEach((bq) => {
-    const wrapper = bq.closest(".hike-embed");
-    if (!wrapper) return;
-    const skeleton = document.createElement("div");
-    skeleton.className = "hike-embed-skeleton";
-    wrapper.parentNode.insertBefore(skeleton, wrapper);
-    wrapper.style.display = "none";
-    const observer = new MutationObserver(() => {
-      if (wrapper.querySelector("iframe")) {
-        skeleton.remove();
-        wrapper.style.display = "";
-        observer.disconnect();
-      }
-    });
-    observer.observe(wrapper, { childList: true, subtree: true });
+    embed.innerHTML = `
+      <a class="hike-cover" href="${link}" target="_blank" rel="noreferrer" aria-label="View ${title} photos on Instagram">
+        <span class="hike-cover-index">${String(index + 1).padStart(2, "0")}</span>
+        <span class="hike-cover-title">${title}</span>
+        <span class="hike-cover-meta">${meta}</span>
+        <span class="hike-cover-action">View photos on Instagram</span>
+      </a>
+    `;
   });
 
   // Contact form — opens mailto as fallback (no backend needed)
