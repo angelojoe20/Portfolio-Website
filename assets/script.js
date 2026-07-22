@@ -328,9 +328,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = copyEmailBtn.dataset.email || "";
       try {
         await navigator.clipboard.writeText(email);
-        copyEmailBtn.textContent = "Copied";
+        copyEmailBtn.textContent = "OK";
+        copyEmailBtn.classList.add("is-copied");
         setTimeout(() => {
           copyEmailBtn.textContent = originalText;
+          copyEmailBtn.classList.remove("is-copied");
         }, 1600);
       } catch {
         window.location.href = `mailto:${email}`;

@@ -1839,12 +1839,17 @@ body {
   background: var(--accent-soft);
   color: var(--text);
   border-radius: var(--radius-sm);
-  min-height: 34px;
-  padding: 0 0.72rem;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
   font: inherit;
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: 1.35rem;
+  line-height: 1;
+  font-weight: 900;
   cursor: pointer;
+  display: inline-grid;
+  place-items: center;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
@@ -1856,6 +1861,15 @@ body {
 .copy-email-btn:focus {
   outline: none;
   box-shadow: var(--focus);
+}
+
+.copy-email-btn.is-copied {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--surface);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 1020px) {
