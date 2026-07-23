@@ -3817,3 +3817,42 @@ img.theme-logo {
     min-height: auto;
   }
 }
+
+/* ===== Compact Email Copy Action ===== */
+.contact-email-row {
+  gap: 0.6rem;
+}
+
+.contact-email-row .copy-email-btn.mail-icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  min-height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.contact-email-row .copy-email-btn.mail-icon:hover {
+  background: color-mix(in srgb, var(--accent-soft) 70%, var(--surface));
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.contact-email-row .copy-email-btn.mail-icon.is-copied {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--surface);
+  font-size: 0.62rem;
+  letter-spacing: 0;
+}
+
+.contact-email {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
