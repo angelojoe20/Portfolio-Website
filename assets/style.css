@@ -3856,3 +3856,74 @@ img.theme-logo {
   min-width: 0;
   overflow-wrap: anywhere;
 }
+
+/* ===== Hero Balance Refinement ===== */
+.hero-title {
+  max-width: 12ch !important;
+  font-size: clamp(2.65rem, 4.7vw, 4.65rem) !important;
+  line-height: 1.02 !important;
+}
+
+.hero-tagline {
+  max-width: 56ch !important;
+  font-size: clamp(1rem, 1.18vw, 1.16rem) !important;
+  line-height: 1.45 !important;
+}
+
+.hero-subtitle {
+  max-width: 56ch !important;
+  font-size: clamp(0.98rem, 1.1vw, 1.1rem) !important;
+}
+
+.hero-visual {
+  background:
+    radial-gradient(circle at 28% 24%, rgba(15, 118, 110, 0.09), transparent 9rem),
+    radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.065), transparent 10rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(248, 250, 252, 0.62)) !important;
+}
+
+[data-theme="dark"] .hero-visual {
+  background:
+    radial-gradient(circle at 28% 24%, rgba(45, 212, 191, 0.1), transparent 9rem),
+    radial-gradient(circle at 82% 78%, rgba(251, 191, 36, 0.06), transparent 10rem),
+    linear-gradient(135deg, rgba(17, 24, 39, 0.54), rgba(15, 20, 27, 0.4)) !important;
+}
+
+.hero-visual::before {
+  opacity: 0.34 !important;
+}
+
+[data-theme="dark"] .hero-visual::before {
+  opacity: 0.36 !important;
+}
+
+.hero-visual::after {
+  inset: 1.55rem !important;
+  border-color: rgba(15, 118, 110, 0.12) !important;
+  color: rgba(15, 118, 110, 0.11) !important;
+  opacity: 0.48 !important;
+}
+
+[data-theme="dark"] .hero-visual::after {
+  border-color: rgba(45, 212, 191, 0.12) !important;
+  color: rgba(45, 212, 191, 0.12) !important;
+}
+
+.terminal-card {
+  background: rgba(17, 24, 39, 0.94) !important;
+  box-shadow:
+    0 18px 42px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+}
+
+@media (max-width: 780px) {
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.25rem, 10vw, 3.15rem) !important;
+  }
+
+  .hero-tagline,
+  .hero-subtitle {
+    max-width: 100% !important;
+  }
+}
