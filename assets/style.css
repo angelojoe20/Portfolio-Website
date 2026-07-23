@@ -3927,3 +3927,19 @@ img.theme-logo {
     max-width: 100% !important;
   }
 }
+
+/* ===== Restore Hero Portrait Clarity ===== */
+.hero-avatar,
+[data-theme="dark"] .hero-avatar {
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.avatar-container {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-theme="dark"] .avatar-container {
+  background: rgba(23, 29, 38, 0.92) !important;
+}
