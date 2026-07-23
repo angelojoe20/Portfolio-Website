@@ -70,6 +70,7 @@
 
         <ul id="navLinks" class="nav-links">
           <li><a href="#snapshot">Snapshot</a></li>
+          <li><a href="#engineering-focus">Focus</a></li>
           <li><a href="#about-me">About</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#experience">Experience</a></li>
@@ -100,6 +101,14 @@
               <span class="chip">Terraform & IaC</span>
               <span class="chip">Cloud & Data Platforms</span>
               <span class="chip">Community Builder</span>
+            </div>
+
+            <div class="credential-strip" aria-label="AWS credentials">
+              <span>AWS SAP</span>
+              <span>AWS SAA</span>
+              <span>AWS ANS</span>
+              <span>AWS AIF</span>
+              <span>AWS CCP</span>
             </div>
 
             <div class="hero-actions">
@@ -206,6 +215,65 @@
                 <p>Infrastructure, AI-assisted apps, IoT, and practical business workflows.</p>
               </article>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== Engineering Focus ====== -->
+      <section class="engineering-focus-section" id="engineering-focus" data-aos="fade-up">
+        <div class="container">
+          <div class="focus-header">
+            <p class="snapshot-eyebrow">Engineering Focus</p>
+            <h2 class="section-heading">What I can help build and improve</h2>
+            <p class="section-subtitle">
+              Practical cloud and DevOps work across infrastructure, automation, governance, and reliability.
+            </p>
+          </div>
+
+          <div class="focus-grid">
+            <article class="focus-card">
+              <span class="focus-index">01</span>
+              <h3>Cloud Infrastructure</h3>
+              <p>Provision and support AWS environments with attention to networking, IAM, storage, and operational readiness.</p>
+              <div class="pill-row">
+                <span class="pill">AWS</span>
+                <span class="pill">VPC</span>
+                <span class="pill">IAM</span>
+              </div>
+            </article>
+
+            <article class="focus-card">
+              <span class="focus-index">02</span>
+              <h3>Infrastructure as Code</h3>
+              <p>Turn repeatable infrastructure patterns into maintainable code, reducing manual setup and deployment drift.</p>
+              <div class="pill-row">
+                <span class="pill">Terraform</span>
+                <span class="pill">AWS CDK</span>
+                <span class="pill">Automation</span>
+              </div>
+            </article>
+
+            <article class="focus-card">
+              <span class="focus-index">03</span>
+              <h3>Cloud Data Platforms</h3>
+              <p>Support analytics environments using AWS services for storage, ETL, access control, and query workflows.</p>
+              <div class="pill-row">
+                <span class="pill">S3</span>
+                <span class="pill">Glue</span>
+                <span class="pill">Athena</span>
+              </div>
+            </article>
+
+            <article class="focus-card">
+              <span class="focus-index">04</span>
+              <h3>Reliability &amp; Security</h3>
+              <p>Improve architecture quality through security remediation, DR patterns, access governance, and operational reviews.</p>
+              <div class="pill-row">
+                <span class="pill">DR</span>
+                <span class="pill">Well-Architected</span>
+                <span class="pill">Governance</span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -821,6 +889,11 @@
                 <h3>Side Hustle PH</h3>
                 <p class="project-impact">Outcome: connects local workers and small businesses through a mobile-first discovery flow.</p>
                 <p>Mobile-first web platform for Filipino users to discover local short-term job opportunities and for small businesses to post temporary work.</p>
+                <div class="case-study-grid" aria-label="Side Hustle PH case study summary">
+                  <div><span>Problem</span><p>Local short-term work discovery can be fragmented and hard to browse quickly.</p></div>
+                  <div><span>Built</span><p>A mobile-first job discovery and posting flow backed by API and relational data.</p></div>
+                  <div><span>Outcome</span><p>Clearer matching experience for workers and small businesses.</p></div>
+                </div>
                 <ul class="project-points">
                   <li>Built around a practical worker-to-business matching flow.</li>
                   <li>Combines API services, relational data, and AI-assisted discovery.</li>
@@ -846,6 +919,11 @@
                 <h3>Disaster Recovery for AWS CDK</h3>
                 <p class="project-impact">Outcome: codifies repeatable disaster recovery architecture for AWS workloads.</p>
                 <p>Infrastructure-as-code solution implementing disaster recovery strategies on AWS using CDK.</p>
+                <div class="case-study-grid" aria-label="Disaster Recovery for AWS CDK case study summary">
+                  <div><span>Problem</span><p>DR architecture is hard to repeat when patterns stay in diagrams only.</p></div>
+                  <div><span>Built</span><p>A CDK-based infrastructure pattern for repeatable AWS recovery planning.</p></div>
+                  <div><span>Outcome</span><p>Stronger resilience story with deployment consistency and reviewable code.</p></div>
+                </div>
                 <ul class="project-points">
                   <li>Turns recovery architecture into repeatable infrastructure code.</li>
                   <li>Highlights cloud resilience, deployment consistency, and AWS design patterns.</li>
@@ -872,6 +950,11 @@
                 <p>
                   IoT-powered vending machine dispensing OTC medications with real-time inventory tracking, multiple payments, and RFID-based rewards.
                 </p>
+                <div class="case-study-grid" aria-label="VendoMedicine case study summary">
+                  <div><span>Problem</span><p>Medicine access and inventory visibility can be limited in small physical setups.</p></div>
+                  <div><span>Built</span><p>An IoT vending flow connecting mobile UX, stock tracking, and ESP32 hardware.</p></div>
+                  <div><span>Outcome</span><p>A practical prototype for controlled dispensing and operational tracking.</p></div>
+                </div>
                 <ul class="project-points">
                   <li>Connected mobile interaction, inventory logic, and ESP32-based hardware.</li>
                   <li>Designed for accessible medicine purchasing and operational tracking.</li>
@@ -896,6 +979,11 @@
                 <h3>Library Management System (Legarda Elementary School)</h3>
                 <p class="project-impact">Outcome: improved book tracking, borrowing records, and library reporting workflows.</p>
                 <p>Streamlined book tracking and database management to improve library operations and reporting.</p>
+                <div class="case-study-grid" aria-label="Library Management System case study summary">
+                  <div><span>Problem</span><p>Manual library workflows make borrowing, returns, and reports harder to maintain.</p></div>
+                  <div><span>Built</span><p>A lightweight desktop system for book records, borrower tracking, and reporting.</p></div>
+                  <div><span>Outcome</span><p>Improved day-to-day visibility for school library operations.</p></div>
+                </div>
                 <ul class="project-points">
                   <li>Supported day-to-day borrowing, returns, and catalog visibility.</li>
                   <li>Used a lightweight desktop stack for school-friendly deployment.</li>
