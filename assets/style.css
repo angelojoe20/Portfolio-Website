@@ -3659,3 +3659,106 @@ img.theme-logo {
   filter: brightness(0) invert(1) !important;
   opacity: 0.96;
 }
+
+/* ===== Hero Tech Visual Polish ===== */
+.hero-visual {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 26% 20%, rgba(15, 118, 110, 0.14), transparent 9rem),
+    radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.12), transparent 10rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(248, 250, 252, 0.48)) !important;
+}
+
+[data-theme="dark"] .hero-visual {
+  background:
+    radial-gradient(circle at 26% 20%, rgba(45, 212, 191, 0.14), transparent 9rem),
+    radial-gradient(circle at 82% 78%, rgba(251, 191, 36, 0.11), transparent 10rem),
+    linear-gradient(135deg, rgba(17, 24, 39, 0.78), rgba(15, 20, 27, 0.54)) !important;
+}
+
+.hero-visual::before,
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-visual::before {
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at 50% 48%, #000 0 48%, transparent 76%);
+  opacity: 0.58;
+}
+
+[data-theme="dark"] .hero-visual::before {
+  background:
+    linear-gradient(rgba(226, 232, 240, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(226, 232, 240, 0.07) 1px, transparent 1px);
+  opacity: 0.62;
+}
+
+.hero-visual::after {
+  inset: 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 18% 32%, currentColor 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 20%, currentColor 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 64%, currentColor 0 2px, transparent 3px),
+    linear-gradient(25deg, transparent 0 31%, currentColor 31.2% 31.45%, transparent 31.65%),
+    linear-gradient(155deg, transparent 0 38%, currentColor 38.2% 38.45%, transparent 38.65%);
+  color: rgba(15, 118, 110, 0.18);
+  opacity: 0.74;
+}
+
+[data-theme="dark"] .hero-visual::after {
+  color: rgba(45, 212, 191, 0.2);
+}
+
+.avatar-container {
+  position: relative;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.36)),
+    radial-gradient(circle at 50% 35%, rgba(15, 118, 110, 0.08), transparent 60%) !important;
+  box-shadow:
+    0 22px 48px rgba(17, 24, 39, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.58) inset !important;
+}
+
+[data-theme="dark"] .avatar-container {
+  background:
+    linear-gradient(180deg, rgba(30, 41, 59, 0.72), rgba(15, 23, 42, 0.34)),
+    radial-gradient(circle at 50% 35%, rgba(45, 212, 191, 0.09), transparent 60%) !important;
+  box-shadow:
+    0 24px 54px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(226, 232, 240, 0.08) inset !important;
+}
+
+.hero-avatar {
+  opacity: 0.82;
+  filter: saturate(0.88) contrast(0.96);
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .hero-avatar {
+  opacity: 0.76;
+  filter: saturate(0.82) contrast(1.02) brightness(0.94);
+  mix-blend-mode: screen;
+}
+
+.terminal-card {
+  z-index: 2;
+  box-shadow:
+    0 22px 55px rgba(15, 23, 42, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+}
+
+.terminal-lines p:first-child {
+  color: #f8fafc;
+}
