@@ -3648,3 +3648,14 @@ main > section > .container {
     gap: 0.2rem;
   }
 }
+
+/* ===== Theme-Aware Brand Marks ===== */
+img.theme-logo {
+  filter: brightness(0) !important;
+  opacity: 0.94;
+}
+
+[data-theme="dark"] img.theme-logo {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.96;
+}
