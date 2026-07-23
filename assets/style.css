@@ -3943,3 +3943,28 @@ img.theme-logo {
 [data-theme="dark"] .avatar-container {
   background: rgba(23, 29, 38, 0.92) !important;
 }
+
+/* ===== Diskarte PH Project Image ===== */
+.project-picture {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: #f8fafc;
+}
+
+.project-picture .project-image {
+  height: 100%;
+  border-bottom: 0;
+}
+
+.diskarte-project-image {
+  object-position: top center;
+}
+
+@media (max-width: 640px) {
+  .diskarte-project-image {
+    object-position: top center;
+  }
+}
