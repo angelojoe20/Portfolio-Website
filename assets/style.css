@@ -3762,3 +3762,58 @@ img.theme-logo {
 .terminal-lines p:first-child {
   color: #f8fafc;
 }
+
+/* ===== Certification Card Alignment ===== */
+.certifications-grid {
+  align-items: stretch !important;
+}
+
+.cert-card {
+  height: 100%;
+  min-height: 365px;
+  padding: clamp(1.45rem, 2vw, 1.9rem) !important;
+  gap: 1rem;
+}
+
+.cert-info {
+  flex: 1;
+  gap: 0.65rem;
+}
+
+.cert-mark {
+  flex: 0 0 auto;
+}
+
+.cert-info h3,
+.cert-dates,
+.cert-summary {
+  margin: 0;
+}
+
+.cert-dates {
+  min-height: 3rem;
+}
+
+.cert-summary {
+  line-height: 1.55;
+}
+
+.cert-actions {
+  margin-top: auto !important;
+  padding-top: 0.25rem;
+  align-items: center;
+}
+
+.cert-actions .btn {
+  min-height: 48px;
+}
+
+@media (max-width: 900px) {
+  .cert-card {
+    min-height: auto;
+  }
+
+  .cert-dates {
+    min-height: auto;
+  }
+}
