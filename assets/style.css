@@ -4236,6 +4236,36 @@ img.theme-logo {
   display: none !important;
 }
 
+/* ===== Beyond Work Instagram Embeds ===== */
+.hike-embed {
+  aspect-ratio: auto !important;
+  min-height: 540px !important;
+  padding: 0.75rem !important;
+  display: flex !important;
+  align-items: stretch;
+  justify-content: center;
+  background: var(--surface) !important;
+}
+
+.hike-embed blockquote.instagram-media,
+.hike-embed iframe {
+  display: block !important;
+  min-width: 0 !important;
+  width: min(100%, 540px) !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.hike-cover {
+  display: none !important;
+}
+
+@media (max-width: 780px) {
+  .hike-embed {
+    min-height: 500px !important;
+  }
+}
+
 /* ===== Minimal Portfolio Flow ===== */
 .section-eyebrow {
   margin: 0;

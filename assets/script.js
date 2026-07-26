@@ -302,6 +302,103 @@ document.addEventListener("DOMContentLoaded", () => {
     applyCertFilter("all");
   }
 
+  const hikingPosts = [
+    {
+      title: "Kayapa Quadpeak",
+      meta: "Kayapa, Nueva Vizcaya • Difficulty: Hard • Trail: Quadpeak",
+      date: "2026-06-27",
+      link: "https://www.instagram.com/p/DaP4ZnNky9K/",
+      tags: ["Major Hike", "Quadpeak", "4 Peaks"],
+    },
+    {
+      title: "Mt. Tenglawan",
+      meta: "Bakun, Benguet • Difficulty: Hard • Trail: Dayhike",
+      date: "2025-12-29",
+      link: "https://www.instagram.com/p/DU5cY1Hk5PX/",
+      tags: ["Mother Mountain", "Major Hike"],
+    },
+    {
+      title: "Aritao Quadpeak",
+      meta: "Aritao, Nueva Vizcaya • Difficulty: Hard • Trail: Quadpeak",
+      date: "2026-05-22",
+      link: "https://www.instagram.com/p/DYeeUIGEzYv/",
+      tags: ["Major Hike", "Quadpeak", "4 Peaks"],
+    },
+    {
+      title: "Mt. Ulap",
+      meta: "Ampucao, Benguet • Difficulty: Moderate • Trail: Dayhike",
+      date: "2026-01-31",
+      link: "https://www.instagram.com/p/DVJNO4Ak2f-/",
+      tags: ["Minor Hike"],
+    },
+    {
+      title: "Panimahawa Ridge",
+      meta: "Impasugong, Bukidnon • Difficulty: Easy • Trail: Dayhike",
+      date: "2026-02-28",
+      link: "https://www.instagram.com/p/DVWAtUxk4iQ/",
+      tags: ["Minor Hike"],
+    },
+    {
+      title: "Mt. Mariglem",
+      meta: "Zambales • Difficulty: Moderate • Trail: Dayhike",
+      date: "2026-06-07",
+      link: "https://www.instagram.com/p/DZSekVREyVM/",
+      tags: ["Minor Hike"],
+    },
+    {
+      title: "Mt. Daraitan",
+      meta: "Tanay, Rizal • Difficulty: Very Hard • Trail: Dayhike",
+      date: "2026-03-15",
+      link: "https://www.instagram.com/p/DV88E5WE8Kt/",
+      tags: ["Minor Hike"],
+    },
+    {
+      title: "Mt. Pamitinan",
+      meta: "Rodriguez, Rizal • Difficulty: Moderate • Trail: Dayhike",
+      date: "2026-06-12",
+      link: "https://www.instagram.com/p/DZl9DpFk8jN/",
+      tags: ["Minor Hike"],
+    },
+  ];
+
+  const refreshInstagramEmbeds = () => {
+    if (window.instgrm?.Embeds?.process) {
+      window.instgrm.Embeds.process();
+    }
+  };
+
+  document.querySelectorAll(".hike-card").forEach((card, index) => {
+    const post = hikingPosts[index];
+    if (!post) return;
+
+    card.dataset.date = post.date;
+    card.querySelector(".hike-top h3").textContent = post.title;
+    card.querySelector(".hike-meta").textContent = post.meta;
+
+    const link = card.querySelector(".btn-link");
+    if (link) link.href = post.link;
+
+    const tags = card.querySelector(".hike-tags");
+    if (tags) {
+      tags.innerHTML = post.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+    }
+
+    const embed = card.querySelector(".hike-embed");
+    if (embed) {
+      embed.innerHTML = `
+        <blockquote
+          class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="${post.link}?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+        ></blockquote>
+      `;
+    }
+  });
+
+  setTimeout(refreshInstagramEmbeds, 250);
+  window.addEventListener("load", refreshInstagramEmbeds);
+
   // Hiking stats (UTC-safe sorting)
   const hikeCards = document.querySelectorAll(".hike-card[data-date]");
   const hikeCountEl = document.getElementById("hikeCount");
@@ -341,24 +438,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const latest = dates[dates.length - 1];
     latestHikeEl.textContent = latest ? formatDate(latest) : "—";
   }
-
-  // Stable hiking covers. Instagram embeds often fail for private/restricted posts.
-  document.querySelectorAll(".hike-card").forEach((card, index) => {
-    const embed = card.querySelector(".hike-embed");
-    const title = card.querySelector(".hike-top h3")?.textContent?.trim() || "Hike";
-    const meta = card.querySelector(".hike-meta")?.textContent?.split("•")[0]?.trim() || "Trail log";
-    const link = card.querySelector(".btn-link")?.getAttribute("href") || "#";
-    if (!embed) return;
-
-    embed.innerHTML = `
-      <a class="hike-cover" href="${link}" target="_blank" rel="noreferrer" aria-label="View ${title} photos on Instagram">
-        <span class="hike-cover-index">${String(index + 1).padStart(2, "0")}</span>
-        <span class="hike-cover-title">${title}</span>
-        <span class="hike-cover-meta">${meta}</span>
-        <span class="hike-cover-action">View photos on Instagram</span>
-      </a>
-    `;
-  });
 
   // Contact form — opens mailto as fallback (no backend needed)
   const contactForm = document.getElementById("contactForm");
