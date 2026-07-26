@@ -4023,6 +4023,78 @@ img.theme-logo {
   }
 }
 
+/* ===== Organization Card Alignment ===== */
+.leadership-grid {
+  align-items: stretch !important;
+}
+
+.leadership-card {
+  height: 100%;
+}
+
+.org-card-inner {
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.org-header {
+  flex: 0 0 110px;
+}
+
+.org-logo {
+  width: 72px !important;
+  height: 72px !important;
+}
+
+.org-logo img {
+  width: 64% !important;
+  height: 64% !important;
+  margin: 18%;
+  object-fit: contain;
+}
+
+.org-content {
+  flex: 1;
+  min-height: 0;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.org-content h3 {
+  min-height: 3.4rem;
+  margin-top: 1.65rem !important;
+  display: flex;
+  align-items: flex-start;
+}
+
+.org-content .badge {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.org-content .dates {
+  min-height: 2rem;
+}
+
+.org-content .description {
+  margin-bottom: 0;
+}
+
+.org-skills {
+  margin-top: auto !important;
+  min-height: 7.35rem;
+  align-content: flex-start;
+}
+
+@media (max-width: 780px) {
+  .org-content h3,
+  .org-content .dates,
+  .org-skills {
+    min-height: auto;
+  }
+}
+
 /* ===== Minimal Portfolio Flow ===== */
 .section-eyebrow {
   margin: 0;
