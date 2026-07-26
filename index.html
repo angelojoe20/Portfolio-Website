@@ -822,10 +822,16 @@
           <h2 class="section-heading">Certifications</h2>
           <p class="section-subtitle">Credential proof, dates, and verification links surfaced upfront for quick scanning.</p>
 
-          <div class="cert-group">
+          <div class="cert-filters" role="tablist" aria-label="Certification filters">
+            <button class="cert-filter-btn is-active" type="button" data-cert-filter="all" aria-selected="true">All</button>
+            <button class="cert-filter-btn" type="button" data-cert-filter="aws" aria-selected="false">AWS</button>
+            <button class="cert-filter-btn" type="button" data-cert-filter="other" aria-selected="false">Other</button>
+          </div>
+
+          <div class="cert-group" data-cert-group="aws">
             <p class="cert-group-label">Amazon Web Services</p>
             <div class="certifications-grid">
-            <article class="cert-card" data-aos="fade-up" data-aos-delay="50">
+            <article class="cert-card" data-cert-category="aws" data-aos="fade-up" data-aos-delay="50">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
                 <p class="cert-level">Specialty</p>
@@ -839,7 +845,7 @@
               </div>
             </article>
 
-            <article class="cert-card" data-aos="fade-up" data-aos-delay="100">
+            <article class="cert-card" data-cert-category="aws" data-aos="fade-up" data-aos-delay="100">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
                 <p class="cert-level">Associate</p>
@@ -853,7 +859,7 @@
               </div>
             </article>
 
-            <article class="cert-card" data-aos="fade-up" data-aos-delay="150">
+            <article class="cert-card" data-cert-category="aws" data-aos="fade-up" data-aos-delay="150">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
                 <p class="cert-level">Foundational</p>
@@ -867,7 +873,7 @@
               </div>
             </article>
 
-            <article class="cert-card" data-aos="fade-up" data-aos-delay="200">
+            <article class="cert-card" data-cert-category="aws" data-aos="fade-up" data-aos-delay="200">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
                 <p class="cert-level">AI</p>
@@ -881,7 +887,7 @@
               </div>
             </article>
 
-            <article class="cert-card cert-card-featured" data-aos="fade-up" data-aos-delay="250">
+            <article class="cert-card cert-card-featured" data-cert-category="aws" data-aos="fade-up" data-aos-delay="250">
               <div class="cert-mark">AWS</div>
               <div class="cert-info">
                 <p class="cert-level">Professional</p>
@@ -897,10 +903,10 @@
             </div>
           </div>
 
-          <div class="cert-group">
+          <div class="cert-group" data-cert-group="other">
             <p class="cert-group-label">Oracle &amp; IBM</p>
             <div class="certifications-grid">
-              <article class="cert-card" data-aos="fade-up" data-aos-delay="50">
+              <article class="cert-card" data-cert-category="other" data-aos="fade-up" data-aos-delay="50">
                 <div class="cert-mark">OCI</div>
                 <div class="cert-info">
                   <p class="cert-level">AI Foundations</p>
@@ -913,7 +919,7 @@
                 </div>
               </article>
 
-              <article class="cert-card" data-aos="fade-up" data-aos-delay="100">
+              <article class="cert-card" data-cert-category="other" data-aos="fade-up" data-aos-delay="100">
                 <div class="cert-mark">IBM</div>
                 <div class="cert-info">
                   <p class="cert-level">Foundational</p>

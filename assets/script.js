@@ -239,6 +239,69 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilter("all");
   }
 
+  // Experience cards: keep the page compact, reveal detail per company.
+  document.querySelectorAll(".exp-card").forEach((card, index) => {
+    const body = card.querySelector(".exp-card-body");
+    const title = card.querySelector(".exp-headings h3")?.textContent?.trim() || "experience";
+    if (!body) return;
+
+    const button = document.createElement("button");
+    const detailsId = `experience-details-${index + 1}`;
+    body.id = detailsId;
+    button.type = "button";
+    button.className = "exp-toggle";
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", detailsId);
+    button.textContent = "View details";
+
+    card.classList.add("exp-enhanced");
+    card.querySelector(".exp-card-header")?.after(button);
+
+    button.addEventListener("click", () => {
+      const isOpen = card.classList.toggle("is-open");
+      button.setAttribute("aria-expanded", String(isOpen));
+      button.textContent = isOpen ? "Hide details" : "View details";
+
+      if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
+        setTimeout(() => AOS.refresh(), 50);
+      }
+    });
+
+    button.setAttribute("aria-label", `Toggle details for ${title}`);
+  });
+
+  // Certification filters
+  const certFilterButtons = document.querySelectorAll(".cert-filter-btn");
+  const certGroups = document.querySelectorAll(".cert-group[data-cert-group]");
+
+  if (certFilterButtons.length && certGroups.length) {
+    const applyCertFilter = (filter) => {
+      certGroups.forEach((group) => {
+        const category = group.dataset.certGroup || "";
+        group.hidden = filter !== "all" && category !== filter;
+      });
+    };
+
+    certFilterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        certFilterButtons.forEach((b) => {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
+        });
+
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
+        applyCertFilter((btn.dataset.certFilter || "all").toLowerCase());
+
+        if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
+          setTimeout(() => AOS.refresh(), 50);
+        }
+      });
+    });
+
+    applyCertFilter("all");
+  }
+
   // Hiking stats (UTC-safe sorting)
   const hikeCards = document.querySelectorAll(".hike-card[data-date]");
   const hikeCountEl = document.getElementById("hikeCount");

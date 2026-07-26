@@ -4146,6 +4146,96 @@ img.theme-logo {
   }
 }
 
+/* ===== Premium Compact Experience ===== */
+.exp-card.exp-enhanced .exp-card-header {
+  padding-bottom: 1rem;
+}
+
+.exp-toggle {
+  width: calc(100% - 2rem);
+  margin: 0 1rem 1rem;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--surface) 86%, var(--surface-2));
+  color: var(--text);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.exp-toggle:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+  background: color-mix(in srgb, var(--accent-soft) 36%, var(--surface));
+}
+
+.exp-toggle:focus {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.exp-card.exp-enhanced:not(.is-open) .exp-card-body {
+  display: none;
+}
+
+.experience-section .pill-row .pill:nth-child(n + 8) {
+  display: none;
+}
+
+.exp-card-body {
+  border-top: 1px solid var(--border);
+}
+
+/* ===== Certification Tabs ===== */
+.cert-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.cert-filter-btn {
+  min-height: 40px;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+[data-theme="dark"] .cert-filter-btn {
+  background: rgba(23, 29, 38, 0.78);
+}
+
+.cert-filter-btn:hover {
+  transform: translateY(-1px);
+  color: var(--text);
+}
+
+.cert-filter-btn.is-active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--surface);
+}
+
+[data-theme="dark"] .cert-filter-btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #111318;
+}
+
+.cert-group[hidden] {
+  display: none !important;
+}
+
 /* ===== Minimal Portfolio Flow ===== */
 .section-eyebrow {
   margin: 0;
