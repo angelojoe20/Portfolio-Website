@@ -3968,3 +3968,52 @@ img.theme-logo {
     object-position: top center;
   }
 }
+
+/* ===== Minimal Portfolio Flow ===== */
+.section-eyebrow {
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.engineering-focus-section {
+  padding: clamp(3rem, 6vw, 4.75rem) 0 !important;
+  background: transparent !important;
+}
+
+.focus-header {
+  max-width: 680px;
+  margin-bottom: 1.5rem !important;
+}
+
+.focus-grid {
+  gap: 0.85rem !important;
+}
+
+.focus-card {
+  min-height: 220px !important;
+  padding: 1.15rem !important;
+  background: rgba(255, 255, 255, 0.62) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .focus-card {
+  background: rgba(23, 29, 38, 0.58) !important;
+}
+
+.focus-index {
+  margin-bottom: 0.75rem !important;
+}
+
+.focus-card .pill-row {
+  padding-top: 0.85rem !important;
+}
+
+@media (max-width: 780px) {
+  .engineering-focus-section {
+    padding-top: 3rem !important;
+  }
+}
