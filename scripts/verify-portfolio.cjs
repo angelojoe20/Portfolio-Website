@@ -1,0 +1,79 @@
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
+const { pathToFileURL } = require("node:url");
+let playwright;
+try { playwright = require("playwright"); }
+catch { playwright = require(path.join(path.dirname(process.execPath), "../node_modules/playwright")); }
+const { chromium } = playwright;
+const output = path.join(os.tmpdir(), "portfolio-review");
+fs.mkdirSync(output, {recursive: true});
+const url = process.argv[2] || pathToFileURL(path.resolve("index.html")).href;
+(async () => {
+  const browser = await chromium.launch({channel: "chrome", headless: true});
+  const errors = [];
+  try {
+    const page = await browser.newPage({viewport:{width:1440,height:1000}, reducedMotion:"reduce"});
+    page.on("pageerror", error => errors.push(error.message));
+    await page.goto(url, {waitUntil:"load"});
+    await page.evaluate(() => document.fonts.ready);
+    await page.screenshot({path:path.join(output,"desktop-light.png")});
+    assert.equal(await page.locator(".hero-title").innerText(), "Angelo Joe Delos Santos");
+    assert.equal(await page.locator(".exp-toggle").count(), 6);
+    await page.locator(".exp-toggle").first().click();
+    assert.equal(await page.locator("#experience-details-1").isVisible(), true);
+    await page.locator(".exp-toggle").first().click();
+    assert.equal(await page.locator("#experience-details-1").isVisible(), false);
+    await page.locator('[data-cert-filter="aws"]').click();
+    assert.equal(await page.locator(".cert-card:visible").count(), 5);
+    await page.locator('[data-cert-filter="other"]').click();
+    assert.equal(await page.locator(".cert-card:visible").count(), 2);
+    await page.locator('[data-cert-filter="all"]').click();
+    assert.equal(await page.locator(".cert-card:visible").count(), 7);
+    await page.locator('[data-filter="cloud"]').click();
+    assert.equal(await page.locator(".project-card:visible").count(), 1);
+    await page.locator('[data-filter="all"]').click();
+    assert.equal(await page.locator(".project-card:visible").count(), 4);
+    const hikes = await page.locator(".hike-top h3").allTextContents();
+    assert.deepEqual(hikes, ["Kayapa Quadpeak","Mt. Tenglawan","Aritao Quadpeak","Mt. Ulap","Panimahawa Ridge","Mt. Mariglem","Mt. Daraitan","Mt. Pamitinan"]);
+    await page.locator('#hiking').scrollIntoViewIfNeeded();
+    const before = await page.locator('#hikeGrid').evaluate(el=>el.scrollLeft);
+    await page.getByRole('button',{name:"Next hiking posts", exact:true}).click();
+    assert.ok(await page.locator('#hikeGrid').evaluate(el=>el.scrollLeft) > before);
+    await page.locator('#skills').scrollIntoViewIfNeeded();
+    await page.screenshot({path:path.join(output,"skills-light.png")});
+    await page.locator('#themeToggle').click();
+    assert.equal(await page.locator("html").getAttribute("data-theme"),"dark");
+    await page.screenshot({path:path.join(output,"skills-dark.png")});
+    await page.evaluate(()=>window.scrollTo(0,0));
+    await page.screenshot({path:path.join(output,"desktop-dark.png")});
+    await page.locator('#themeToggle').click();
+    const overflow = [];
+    for (const width of [320,390,768,1024,1440,1920]) {
+      await page.setViewportSize({width,height:900});
+      const dimensions = await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
+      if (dimensions.scroll > dimensions.width + 1) overflow.push({width,...dimensions});
+    }
+    assert.deepEqual(overflow, [], "No horizontal document overflow");
+    await page.setViewportSize({width:390,height:844});
+    await page.evaluate(()=>window.scrollTo(0,0));
+    await page.screenshot({path:path.join(output,"mobile-light.png")});
+    await page.locator('#navToggle').click();
+    assert.equal(await page.locator('#navToggle').getAttribute("aria-expanded"),"true");
+    await page.locator('#navLinks a[href="#contact"]').click();
+    assert.equal(await page.locator('#navToggle').getAttribute("aria-expanded"),"false");
+    await page.locator('#contactName').fill("Portfolio Test");
+    await page.locator('#contactEmail').fill("invalid-address");
+    assert.equal(await page.locator('#contactEmail').evaluate(el=>el.checkValidity()),false);
+    await page.locator('#contactEmail').fill("test@example.com");
+    assert.equal(await page.locator('#contactEmail').evaluate(el=>el.checkValidity()),true);
+    await page.screenshot({path:path.join(output,"contact-mobile.png")});
+    await page.evaluate(()=>document.querySelectorAll('img').forEach(img=>img.loading="eager"));
+    await page.waitForFunction(()=>[...document.images].every(img=>img.complete),null,{timeout:20000}).catch(()=>{});
+    const broken = await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||!i.naturalWidth).map(i=>({alt:i.alt,src:i.getAttribute("src")})));
+    console.log(JSON.stringify({url,passed:"Theme, experience, filters, hike order, gallery, mobile menu, email validity, and six viewport widths",errors,brokenImages:broken,screenshots:output},null,2));
+    assert.deepEqual(errors, [], "No page JavaScript errors");
+    assert.deepEqual(broken, [], "All portfolio images load");
+  } finally { await browser.close(); }
+})().catch(e=>{console.error(e);process.exitCode=1;});

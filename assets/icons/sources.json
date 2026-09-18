@@ -1,0 +1,127 @@
+[
+  {
+    "name": "Python",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg",
+    "file": "assets/icons/python.svg"
+  },
+  {
+    "name": "Flutter",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/flutter/flutter-original.svg",
+    "file": "assets/icons/flutter.svg"
+  },
+  {
+    "name": "JavaScript",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg",
+    "file": "assets/icons/javascript.svg"
+  },
+  {
+    "name": "C++",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/cplusplus/cplusplus-original.svg",
+    "file": "assets/icons/c-.svg"
+  },
+  {
+    "name": "Next.js",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nextjs/nextjs-original.svg",
+    "file": "assets/icons/next-js.svg"
+  },
+  {
+    "name": "Microsoft Azure",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/azure/azure-original.svg",
+    "file": "assets/icons/microsoft-azure.svg"
+  },
+  {
+    "name": "Oracle Cloud",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/oracle.svg",
+    "file": "assets/icons/oracle-cloud.svg"
+  },
+  {
+    "name": "Git",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg",
+    "file": "assets/icons/git.svg"
+  },
+  {
+    "name": "GitLab",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/gitlab/gitlab-original.svg",
+    "file": "assets/icons/gitlab.svg"
+  },
+  {
+    "name": "Docker",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg",
+    "file": "assets/icons/docker.svg"
+  },
+  {
+    "name": "Nginx",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nginx/nginx-original.svg",
+    "file": "assets/icons/nginx.svg"
+  },
+  {
+    "name": "Postman",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postman/postman-original.svg",
+    "file": "assets/icons/postman.svg"
+  },
+  {
+    "name": "Terraform",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/terraform/terraform-original.svg",
+    "file": "assets/icons/terraform.svg"
+  },
+  {
+    "name": "MySQL",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mysql/mysql-original.svg",
+    "file": "assets/icons/mysql.svg"
+  },
+  {
+    "name": "SQLite",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/sqlite/sqlite-original.svg",
+    "file": "assets/icons/sqlite.svg"
+  },
+  {
+    "name": "PostgreSQL",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postgresql/postgresql-original.svg",
+    "file": "assets/icons/postgresql.svg"
+  },
+  {
+    "name": "Jira",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/jira/jira-original.svg",
+    "file": "assets/icons/jira.svg"
+  },
+  {
+    "name": "Confluence",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/confluence/confluence-original.svg",
+    "file": "assets/icons/confluence.svg"
+  },
+  {
+    "name": "Trello",
+    "source": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/trello/trello-plain.svg",
+    "file": "assets/icons/trello.svg"
+  },
+  {
+    "name": "ClickUp",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/clickup.svg",
+    "file": "assets/icons/clickup.svg"
+  },
+  {
+    "name": "Veeam",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/veeam.svg",
+    "file": "assets/icons/veeam.svg"
+  },
+  {
+    "name": "Odoo",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/odoo.svg",
+    "file": "assets/icons/odoo.svg"
+  },
+  {
+    "name": "IBM",
+    "source": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/ibm.svg",
+    "file": "assets/icons/ibm.svg"
+  },
+  {
+    "name": "ManageEngine",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/zoho.svg",
+    "file": "assets/icons/manageengine.svg"
+  },
+  {
+    "name": "HRIS",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/sap.svg",
+    "file": "assets/icons/hris.svg"
+  }
+]

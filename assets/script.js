@@ -1,503 +1,225 @@
-// assets/script.js
 document.addEventListener("DOMContentLoaded", () => {
-  // Reduced-motion helper
-  const prefersReducedMotion = () =>
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Debounce helper
-  const debounce = (fn, ms) => {
-    let t;
-    return (...args) => {
-      clearTimeout(t);
-      t = setTimeout(() => fn(...args), ms);
-    };
-  };
-
-  // Footer year
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-  // Dark mode toggle
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const renderIcons = () => window.lucide?.createIcons();
+  const icon = (name) => '<i data-lucide="' + name + '" aria-hidden="true"></i>';
   const themeToggle = document.getElementById("themeToggle");
-  const themeIcon = themeToggle?.querySelector(".theme-icon");
-  const savedTheme = localStorage.getItem("theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-
+  let savedTheme;
+  try { savedTheme = localStorage.getItem("theme"); } catch {}
   const applyTheme = (theme) => {
-    document.documentElement.setAttribute("data-theme", theme);
-    if (themeIcon) themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
-    localStorage.setItem("theme", theme);
+    document.documentElement.dataset.theme = theme;
+    themeToggle.innerHTML = icon(theme === "dark" ? "sun" : "moon");
+    const label = "Switch to " + (theme === "dark" ? "light" : "dark") + " mode";
+    themeToggle.setAttribute("aria-label", label);
+    themeToggle.title = label;
+    document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#131715" : "#fafbfa";
+    try { localStorage.setItem("theme", theme); } catch {}
+    renderIcons();
   };
-
-  applyTheme(savedTheme);
-
-  themeToggle?.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme");
-    applyTheme(current === "dark" ? "light" : "dark");
+  applyTheme(savedTheme === "dark" || savedTheme === "light" ? savedTheme :
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  themeToggle.addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
   });
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Scroll to top
-  const scrollTopBtn = document.getElementById("scrollTop");
-  if (scrollTopBtn) {
-    window.addEventListener("scroll", () => {
-      scrollTopBtn.classList.toggle("visible", window.scrollY > 400);
-    }, { passive: true });
-    scrollTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  // Initialize AOS
-  if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
-    AOS.init({ duration: 700, once: false, offset: 80 });
-  }
-
-  // Typed.js rotating subtitle
-  const typedTarget = document.getElementById("typed-text");
-  if (typedTarget && typeof Typed !== "undefined" && !prefersReducedMotion()) {
-    // eslint-disable-next-line no-new
-    new Typed("#typed-text", {
-      strings: [
-        "Building secure infrastructure, repeatable delivery pipelines, and practical cloud solutions.",
-        "Designing AWS environments with automation, governance, and reliability in mind.",
-        "Open to cloud engineering roles, collaborations, and systems-focused work."
-      ],
-      typeSpeed: 55,
-      backSpeed: 14,
-      backDelay: 2500,
-      loop: true,
-      showCursor: true,
-      cursorChar: "|"
-    });
-  } else if (typedTarget) {
-    typedTarget.textContent = "Building secure infrastructure, repeatable delivery pipelines, and practical cloud solutions.";
-  }
-
-  // tsParticles (HERO)
-  if (window.tsParticles && !prefersReducedMotion()) {
-    const heroParticlesEl = document.getElementById("particles-js");
-    if (heroParticlesEl) {
-      tsParticles.load("particles-js", {
-        particles: {
-          number: {
-            value: window.innerWidth > 768 ? 55 : 25,
-            density: { enable: true, area: 900 }
-          },
-          color: { value: "#111827" },
-          shape: { type: "circle" },
-          opacity: { value: 0.12, random: true },
-          size: { value: 2.2, random: true },
-          links: {
-            enable: true,
-            distance: 160,
-            color: "#111827",
-            opacity: 0.06,
-            width: 1
-          },
-          move: { enable: true, speed: 0.7, outModes: "out" }
-        },
-        interactivity: {
-          detectsOn: "canvas",
-          events: {
-            onHover: { enable: window.innerWidth > 768, mode: "grab" },
-            onClick: { enable: false }
-          },
-          modes: {
-            grab: { distance: 140, links: { opacity: 0.12 } }
-          }
-        },
-        detectRetina: true
-      });
-    }
-  }
-
-  // VanillaTilt
-  if (window.VanillaTilt && !prefersReducedMotion()) {
-    const tiltElems = document.querySelectorAll("[data-tilt]");
-    if (tiltElems.length) {
-      VanillaTilt.init(tiltElems, {
-        max: 8,
-        speed: 400,
-        glare: false,
-        scale: 1.02
-      });
-    }
-  }
-
-  // Navbar show/hide (with fallback)
-  const nav = document.querySelector(".navbar");
-  const heroSection = document.getElementById("home");
-
-  if (nav && heroSection) {
-    if (!("IntersectionObserver" in window)) {
-      nav.classList.add("visible");
-    } else {
-      new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) nav.classList.remove("visible");
-            else nav.classList.add("visible");
-          });
-        },
-        { threshold: 0.2 }
-      ).observe(heroSection);
-    }
-  }
-
-  // Active nav link highlighting on scroll
-  const navLinkEls = document.querySelectorAll(".nav-links a[href^='#']");
-  const sectionIds = [...navLinkEls].map((a) => a.getAttribute("href").slice(1));
-  const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
-
-  if (sections.length && navLinkEls.length) {
-    const setActive = (id) => {
-      navLinkEls.forEach((a) => {
-        a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
-      });
-    };
-
-    new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { threshold: 0.3, rootMargin: "-60px 0px -40% 0px" }
-    ).observe && sections.forEach((s) =>
-      new IntersectionObserver(
-        (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }); },
-        { threshold: 0.3, rootMargin: "-60px 0px -40% 0px" }
-      ).observe(s)
-    );
-  }
-
-  // Mobile nav toggle
   const navToggle = document.getElementById("navToggle");
   const navLinks = document.getElementById("navLinks");
+  const closeNav = () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+  navToggle.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+  navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNav));
+  document.addEventListener("click", (event) => {
+    if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) closeNav();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navLinks.classList.contains("open")) {
+      closeNav();
+      navToggle.focus();
+    }
+  });
+  window.matchMedia("(min-width: 901px)").addEventListener("change", closeNav);
 
-  if (navToggle && navLinks) {
-    const closeNav = () => {
-      navLinks.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-    };
-
-    navToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-      if (isOpen) navLinks.querySelector("a")?.focus();
+  // Use each section's top edge; tall expanded sections remain correctly selected.
+  const links = [...navLinks.querySelectorAll("a")];
+  const sections = links.map((link) => document.querySelector(link.getAttribute("href")));
+  const scrollTop = document.getElementById("scrollTop");
+  let scrollPending = false;
+  const updateScroll = () => {
+    let activeId = "";
+    sections.forEach((section) => {
+      if (section.getBoundingClientRect().top <= 160) activeId = section.id;
     });
-
-    navLinks.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", closeNav);
+    links.forEach((link) => {
+      const active = link.hash === "#" + activeId;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
     });
+    scrollTop.classList.toggle("visible", window.scrollY > 500);
+    scrollPending = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (!scrollPending) {
+      scrollPending = true;
+      requestAnimationFrame(updateScroll);
+    }
+  }, { passive: true });
+  updateScroll();
+  scrollTop.addEventListener("click", () => window.scrollTo({
+    top: 0, behavior: reducedMotion.matches ? "instant" : "smooth"
+  }));
 
-    document.addEventListener("click", (e) => {
-      if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) closeNav();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeNav();
-    });
-  }
-
-  // Project filters (tabs)
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const projectCards = document.querySelectorAll(".project-card[data-category]");
-
-  if (filterButtons.length && projectCards.length) {
-    const applyFilter = (filter) => {
-      projectCards.forEach((card) => {
-        const categories = (card.dataset.category || "")
-          .split(" ")
-          .map((s) => s.trim().toLowerCase())
-          .filter(Boolean);
-
-        const show = filter === "all" || categories.includes(filter);
-        card.style.display = show ? "" : "none";
-      });
-    };
-
-    filterButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        filterButtons.forEach((b) => {
-          b.classList.remove("is-active");
-          b.setAttribute("aria-selected", "false");
-        });
-
-        btn.classList.add("is-active");
-        btn.setAttribute("aria-selected", "true");
-
-        const filter = (btn.dataset.filter || "all").toLowerCase();
-        applyFilter(filter);
-
-        if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
-          setTimeout(() => AOS.refresh(), 50);
-        }
-      });
-    });
-
-    applyFilter("all");
-  }
-
-  // Experience cards: keep the page compact, reveal detail per company.
   document.querySelectorAll(".exp-card").forEach((card, index) => {
     const body = card.querySelector(".exp-card-body");
-    const title = card.querySelector(".exp-headings h3")?.textContent?.trim() || "experience";
-    if (!body) return;
-
+    const title = card.querySelector("h3").textContent.trim();
     const button = document.createElement("button");
-    const detailsId = `experience-details-${index + 1}`;
-    body.id = detailsId;
-    button.type = "button";
+    body.id = "experience-details-" + (index + 1);
+    body.hidden = true;
     button.className = "exp-toggle";
+    button.type = "button";
+    button.setAttribute("aria-controls", body.id);
     button.setAttribute("aria-expanded", "false");
-    button.setAttribute("aria-controls", detailsId);
-    button.textContent = "View details";
-
-    card.classList.add("exp-enhanced");
-    card.querySelector(".exp-card-header")?.after(button);
-
+    button.setAttribute("aria-label", "Show experience at " + title);
+    button.title = "Show experience";
+    button.innerHTML = icon("chevron-down");
+    card.querySelector(".exp-card-header").append(button);
     button.addEventListener("click", () => {
-      const isOpen = card.classList.toggle("is-open");
-      button.setAttribute("aria-expanded", String(isOpen));
-      button.textContent = isOpen ? "Hide details" : "View details";
-
-      if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
-        setTimeout(() => AOS.refresh(), 50);
-      }
+      body.hidden = !body.hidden;
+      button.setAttribute("aria-expanded", String(!body.hidden));
+      button.setAttribute("aria-label", (body.hidden ? "Show" : "Hide") + " experience at " + title);
+      button.title = body.hidden ? "Show experience" : "Hide experience";
+      updateScroll();
     });
-
-    button.setAttribute("aria-label", `Toggle details for ${title}`);
   });
 
-  // Certification filters
-  const certFilterButtons = document.querySelectorAll(".cert-filter-btn");
-  const certGroups = document.querySelectorAll(".cert-group[data-cert-group]");
-
-  if (certFilterButtons.length && certGroups.length) {
-    const applyCertFilter = (filter) => {
-      certGroups.forEach((group) => {
-        const category = group.dataset.certGroup || "";
-        group.hidden = filter !== "all" && category !== filter;
+  const setupFilters = (buttonSelector, itemSelector, attribute, categories) => {
+    const buttons = [...document.querySelectorAll(buttonSelector)];
+    const items = [...document.querySelectorAll(itemSelector)];
+    const apply = (filter) => {
+      buttons.forEach((button) => {
+        const active = button.dataset[attribute] === filter;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", String(active));
+        button.removeAttribute("aria-selected");
+      });
+      items.forEach((item) => {
+        item.hidden = filter !== "all" && !categories(item).includes(filter);
       });
     };
-
-    certFilterButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        certFilterButtons.forEach((b) => {
-          b.classList.remove("is-active");
-          b.setAttribute("aria-selected", "false");
-        });
-
-        btn.classList.add("is-active");
-        btn.setAttribute("aria-selected", "true");
-        applyCertFilter((btn.dataset.certFilter || "all").toLowerCase());
-
-        if (typeof AOS !== "undefined" && !prefersReducedMotion()) {
-          setTimeout(() => AOS.refresh(), 50);
-        }
-      });
-    });
-
-    applyCertFilter("all");
-  }
-
-  const hikingPosts = [
-    {
-      title: "Kayapa Quadpeak",
-      meta: "Kayapa, Nueva Vizcaya • Difficulty: Hard • Trail: Quadpeak",
-      date: "2026-06-27",
-      link: "https://www.instagram.com/p/DaP4ZnNky9K/",
-      tags: ["Major Hike", "Quadpeak", "4 Peaks"],
-    },
-    {
-      title: "Mt. Tenglawan",
-      meta: "Bakun, Benguet • Difficulty: Hard • Trail: Dayhike",
-      date: "2025-12-29",
-      link: "https://www.instagram.com/p/DU5cY1Hk5PX/",
-      tags: ["Mother Mountain", "Major Hike"],
-    },
-    {
-      title: "Aritao Quadpeak",
-      meta: "Aritao, Nueva Vizcaya • Difficulty: Hard • Trail: Quadpeak",
-      date: "2026-05-22",
-      link: "https://www.instagram.com/p/DYeeUIGEzYv/",
-      tags: ["Major Hike", "Quadpeak", "4 Peaks"],
-    },
-    {
-      title: "Mt. Ulap",
-      meta: "Ampucao, Benguet • Difficulty: Moderate • Trail: Dayhike",
-      date: "2026-01-31",
-      link: "https://www.instagram.com/p/DVJNO4Ak2f-/",
-      tags: ["Minor Hike"],
-    },
-    {
-      title: "Panimahawa Ridge",
-      meta: "Impasugong, Bukidnon • Difficulty: Easy • Trail: Dayhike",
-      date: "2026-02-28",
-      link: "https://www.instagram.com/p/DVWAtUxk4iQ/",
-      tags: ["Minor Hike"],
-    },
-    {
-      title: "Mt. Mariglem",
-      meta: "Zambales • Difficulty: Moderate • Trail: Dayhike",
-      date: "2026-06-07",
-      link: "https://www.instagram.com/p/DZSekVREyVM/",
-      tags: ["Minor Hike"],
-    },
-    {
-      title: "Mt. Daraitan",
-      meta: "Tanay, Rizal • Difficulty: Very Hard • Trail: Dayhike",
-      date: "2026-03-15",
-      link: "https://www.instagram.com/p/DV88E5WE8Kt/",
-      tags: ["Minor Hike"],
-    },
-    {
-      title: "Mt. Pamitinan",
-      meta: "Rodriguez, Rizal • Difficulty: Moderate • Trail: Dayhike",
-      date: "2026-06-12",
-      link: "https://www.instagram.com/p/DZl9DpFk8jN/",
-      tags: ["Minor Hike"],
-    },
-  ];
-
-  const refreshInstagramEmbeds = () => {
-    if (window.instgrm?.Embeds?.process) {
-      window.instgrm.Embeds.process();
-    }
+    buttons.forEach((button) => button.addEventListener("click", () => apply(button.dataset[attribute])));
+    apply("all");
   };
+  setupFilters(".filter-btn", ".project-card", "filter", (item) => item.dataset.category.split(" "));
+  setupFilters(".cert-filter-btn", ".cert-group", "certFilter", (item) => [item.dataset.certGroup]);
 
-  document.querySelectorAll(".hike-card").forEach((card, index) => {
-    const post = hikingPosts[index];
-    if (!post) return;
-
-    card.dataset.date = post.date;
-    card.querySelector(".hike-top h3").textContent = post.title;
-    card.querySelector(".hike-meta").textContent = post.meta;
-
-    const link = card.querySelector(".btn-link");
-    if (link) link.href = post.link;
-
-    const tags = card.querySelector(".hike-tags");
-    if (tags) {
-      tags.innerHTML = post.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
-    }
-
-    const embed = card.querySelector(".hike-embed");
-    if (embed) {
-      embed.innerHTML = `
-        <blockquote
-          class="instagram-media"
-          data-instgrm-captioned
-          data-instgrm-permalink="${post.link}?utm_source=ig_embed&amp;utm_campaign=loading"
-          data-instgrm-version="14"
-        ></blockquote>
-      `;
-    }
-  });
-
-  setTimeout(refreshInstagramEmbeds, 250);
-  window.addEventListener("load", refreshInstagramEmbeds);
-
-  // Hiking stats (UTC-safe sorting)
-  const hikeCards = document.querySelectorAll(".hike-card[data-date]");
-  const hikeCountEl = document.getElementById("hikeCount");
-  const latestHikeEl = document.getElementById("latestHike");
-
-  const toUTC = (iso) => {
-    const [y, m, d] = (iso || "").split("-").map(Number);
-    if (!y || !m || !d) return NaN;
-    return Date.UTC(y, m - 1, d);
+  const gallery = document.getElementById("hikeGrid");
+  const cards = [...gallery.querySelectorAll(".hike-card")];
+  const controls = document.createElement("div");
+  controls.className = "gallery-controls";
+  controls.innerHTML = '<p class="gallery-count" role="status">8 trail journals</p><div class="gallery-buttons">' +
+    '<button type="button" class="gallery-arrow" data-direction="-1" aria-label="Previous hiking posts" title="Previous hiking posts">' + icon("arrow-left") + '</button>' +
+    '<button type="button" class="gallery-arrow" data-direction="1" aria-label="Next hiking posts" title="Next hiking posts">' + icon("arrow-right") + '</button></div>';
+  gallery.before(controls);
+  gallery.setAttribute("tabindex", "0");
+  gallery.setAttribute("aria-label", "Hiking photo journals");
+  const arrows = [...controls.querySelectorAll("button")];
+  const updateGallery = () => {
+    arrows[0].disabled = gallery.scrollLeft < 2;
+    arrows[1].disabled = gallery.scrollLeft >= gallery.scrollWidth - gallery.clientWidth - 2;
   };
+  arrows.forEach((button) => button.addEventListener("click", () => {
+    const distance = cards[0].getBoundingClientRect().width + 20;
+    gallery.scrollBy({ left: Number(button.dataset.direction) * distance, behavior: reducedMotion.matches ? "instant" : "smooth" });
+  }));
+  gallery.addEventListener("scroll", updateGallery, { passive: true });
+  window.addEventListener("resize", updateGallery);
+  updateGallery();
 
-  const formatDate = (iso) => {
-    const utc = toUTC(iso);
-    if (!utc) return iso || "—";
-    const dt = new Date(utc);
-    return dt.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    });
+  // Defer Instagram's third-party script until the photo journal is near view.
+  let instagramRequested = false;
+  const loadInstagram = () => {
+    if (instagramRequested) return;
+    instagramRequested = true;
+    const script = document.createElement("script");
+    script.src = "https://www.instagram.com/embed.js";
+    script.async = true;
+    script.onload = () => window.instgrm?.Embeds?.process();
+    document.body.append(script);
   };
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        loadInstagram();
+        observer.disconnect();
+      }
+    }, { rootMargin: "300px" });
+    observer.observe(gallery);
+  } else { loadInstagram(); }
 
-  if (hikeCards.length && hikeCountEl && latestHikeEl) {
-    // Count actual peaks: quadpeak cards = 4 peaks each, others = 1
-    const totalPeaks = [...hikeCards].reduce((sum, card) => {
-      const tags = card.querySelectorAll(".tag");
-      const isQuad = [...tags].some(t => t.textContent.includes("4 Peaks"));
-      return sum + (isQuad ? 4 : 1);
-    }, 0);
-    hikeCountEl.textContent = String(totalPeaks);
+  const totalPeaks = cards.reduce((sum, card) => sum + Number(card.dataset.peaks || 1), 0);
+  document.getElementById("hikeCount").textContent = totalPeaks;
+  const latest = cards.map((card) => card.dataset.date).filter(Boolean).sort().pop();
+  document.getElementById("latestHike").textContent = latest ?
+    new Date(latest + "T00:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }) : "-";
 
-    const dates = [...hikeCards]
-      .map((c) => (c.dataset.date || "").trim())
-      .filter(Boolean)
-      .sort((a, b) => toUTC(a) - toUTC(b));
-
-    const latest = dates[dates.length - 1];
-    latestHikeEl.textContent = latest ? formatDate(latest) : "—";
-  }
-
-  // Contact form — opens mailto as fallback (no backend needed)
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
-  if (contactForm && formStatus) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = contactForm.contactName?.value.trim();
-      const email = contactForm.contactEmail?.value.trim();
-      const subject = contactForm.contactSubject?.value.trim() || "Portfolio Inquiry";
-      const message = contactForm.contactMessage?.value.trim();
-      if (!name || !email || !message) {
-        formStatus.textContent = "Please fill in all required fields.";
-        formStatus.className = "form-status error";
-        return;
-      }
-      const mailto = `mailto:angelojoedelossantos20@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
-      window.location.href = mailto;
-      formStatus.textContent = "Opening your email client...";
-      formStatus.className = "form-status success";
-      contactForm.reset();
-    });
-  }
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    const data = new FormData(contactForm);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const subject = String(data.get("subject") || "").trim() || "Portfolio inquiry";
+    const message = String(data.get("message") || "").trim();
+    if (!name || !email || !message) {
+      formStatus.textContent = "Please enter your name, email, and message.";
+      formStatus.className = "form-status error";
+      return;
+    }
+    const body = "Name: " + name + "\nEmail: " + email + "\n\n" + message;
+    window.location.href = "mailto:angelojoedelossantos20@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    formStatus.textContent = "Your email draft is ready in your email app. Send it there to get in touch.";
+    formStatus.className = "form-status";
+  });
 
-  // Copy email
-  const copyEmailBtn = document.getElementById("copyEmail");
-  if (copyEmailBtn) {
-    const originalText = copyEmailBtn.textContent;
-    copyEmailBtn.addEventListener("click", async () => {
-      const email = copyEmailBtn.dataset.email || "";
-      try {
-        await navigator.clipboard.writeText(email);
-        copyEmailBtn.textContent = "OK";
-        copyEmailBtn.classList.add("is-copied");
-        setTimeout(() => {
-          copyEmailBtn.textContent = originalText;
-          copyEmailBtn.classList.remove("is-copied");
-        }, 1600);
-      } catch {
-        window.location.href = `mailto:${email}`;
-      }
-    });
-  }
+  const copyEmail = document.getElementById("copyEmail");
+  let copyReset;
+  copyEmail.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copyEmail.dataset.email);
+      copyEmail.innerHTML = icon("check");
+      copyEmail.title = "Email copied";
+      copyEmail.setAttribute("aria-label", "Email copied");
+      copyEmail.classList.add("is-copied");
+      formStatus.textContent = "Email address copied.";
+      formStatus.className = "form-status";
+      renderIcons();
+      clearTimeout(copyReset);
+      copyReset = setTimeout(() => {
+        copyEmail.innerHTML = icon("copy");
+        copyEmail.title = "Copy email address";
+        copyEmail.setAttribute("aria-label", "Copy email address");
+        copyEmail.classList.remove("is-copied");
+        renderIcons();
+      }, 2000);
+    } catch {
+      formStatus.textContent = "Copy is unavailable. You can select the email address or open its link.";
+      formStatus.className = "form-status error";
+    }
+  });
+  document.querySelectorAll(".icon-btn").forEach((link) => { link.title = link.getAttribute("aria-label"); });
+  renderIcons();
 
-  // Refresh AOS on resize
-  window.addEventListener(
-    "resize",
-    debounce(() => {
-      if (typeof AOS !== "undefined" && !prefersReducedMotion()) AOS.refresh();
-    }, 200)
-  );
-
-  // Remove the old PWA service worker so portfolio updates are visible immediately.
+  // Retire the legacy offline cache so old portfolio assets cannot mask updates.
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.getRegistrations()
-        .then((registrations) => {
-          registrations.forEach((registration) => registration.unregister());
-        })
-        .catch(() => {});
-    });
+    navigator.serviceWorker.getRegistrations()
+      .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+      .catch(() => {});
   }
 });
