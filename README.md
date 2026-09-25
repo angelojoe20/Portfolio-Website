@@ -34,9 +34,12 @@ With Node.js, Playwright, and Chrome available, run from the repository root:
 
 ```sh
 node scripts/verify-portfolio.cjs
+node scripts/verify-mobile.cjs
 ```
 
 The script checks persisted themes, company disclosures, certificate links, project filters and notes, screenshot previews, keyboard focus, hiking order and scrolling, blocked-Instagram fallback, mobile navigation, clipboard feedback, email validation, image loading, and overflow at nine viewport widths. Clipboard access is mocked and no email is sent. Screenshots are written to the system temporary directory under `portfolio-review`. An optional URL argument checks a deployed version.
+
+The mobile suite uses touch-enabled Chrome emulation at seven phone, landscape, and tablet sizes. It checks menu scroll locking and focus, skill disclosures across rotation, touch filters, native hiking swipes, full-screen previews, and form sizing. Light and dark screenshots are saved under `portfolio-mobile` in the system temporary directory. These checks do not replace testing on physical iOS and Android devices.
 
 ## Deployment
 

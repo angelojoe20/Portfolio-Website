@@ -24,30 +24,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const navToggle = document.getElementById("navToggle");
   const navLinks = document.getElementById("navLinks");
-  const closeNav = () => {
-    if (!navLinks.classList.contains("open")) return;
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.setAttribute("aria-label", "Open navigation");
-    navToggle.innerHTML = icon("menu");
-    renderIcons();
-  };
-  navToggle.addEventListener("click", () => {
-    const open = navLinks.classList.toggle("open");
+  const navBackdrop = document.getElementById("navBackdrop");
+  const navbar = document.querySelector(".navbar");
+  const navBackground = document.querySelectorAll(".hero, main, .footer, .scroll-top");
+  const setNavOpen = (open) => {
+    navLinks.classList.toggle("open", open);
+    document.body.classList.toggle("nav-open", open);
+    navBackdrop.hidden = !open;
+    navBackground.forEach(element => { element.inert = open; });
     navToggle.setAttribute("aria-expanded", String(open));
     navToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
     navToggle.innerHTML = icon(open ? "x" : "menu");
     renderIcons();
+  };
+  const closeNav = () => {
+    if (!navLinks.classList.contains("open")) return;
+    setNavOpen(false);
+  };
+  navToggle.addEventListener("click", () => {
+    setNavOpen(!navLinks.classList.contains("open"));
   });
   navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNav));
+  document.querySelector('.nav-logo > a').addEventListener("click", closeNav);
+  navBackdrop.addEventListener("click", () => { closeNav(); navToggle.focus(); });
   document.addEventListener("click", (event) => {
     const path = event.composedPath();
     if (!path.includes(navLinks) && !path.includes(navToggle)) closeNav();
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && navLinks.classList.contains("open")) {
+    if (!navLinks.classList.contains("open")) return;
+    if (event.key === "Escape") {
       closeNav();
       navToggle.focus();
+    }
+    if (event.key === "Tab") {
+      const targets = [...navbar.querySelectorAll("a, button")].filter(element => element.getClientRects().length);
+      const first = targets[0], last = targets.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   });
   window.matchMedia("(min-width: 901px)").addEventListener("change", closeNav);
@@ -88,6 +107,46 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollTop.addEventListener("click", () => window.scrollTo({
     top: 0, behavior: reducedMotion.matches ? "instant" : "smooth"
   }));
+
+  // Keep all skills visible on desktop; remember each phone disclosure when resizing.
+  const phoneLayout = window.matchMedia("(max-width: 640px)");
+  const skillGroups = [...document.querySelectorAll(".skill-column")].map((column, index) => {
+    const heading = column.querySelector("h3");
+    const name = heading.textContent.trim();
+    const items = [...column.querySelectorAll(".skill-item")];
+    const list = document.createElement("div");
+    list.className = "skill-items";
+    list.id = "skill-group-" + (index + 1);
+    list.append(...items);
+    const label = document.createElement("span");
+    label.className = "skill-heading-label";
+    label.textContent = name;
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "skill-toggle";
+    toggle.setAttribute("aria-controls", list.id);
+    toggle.innerHTML = '<span>' + name + '</span><span class="skill-count" aria-hidden="true">' +
+      String(items.length).padStart(2, "0") + '</span>' + icon("chevron-down");
+    heading.replaceChildren(label, toggle);
+    column.append(list);
+    const group = {list, toggle, open: name === "Cloud"};
+    toggle.addEventListener("click", () => {
+      group.open = !group.open;
+      list.hidden = !group.open;
+      toggle.setAttribute("aria-expanded", String(group.open));
+      updateScroll();
+    });
+    return group;
+  });
+  const updateSkills = () => {
+    skillGroups.forEach(group => {
+      group.list.hidden = phoneLayout.matches && !group.open;
+      group.toggle.setAttribute("aria-expanded", String(group.open));
+    });
+    updateScroll();
+  };
+  phoneLayout.addEventListener("change", updateSkills);
+  updateSkills();
 
   const experienceToggles = [];
   const experienceToolbar = document.createElement("div");
