@@ -33,6 +33,12 @@ const url = process.argv[2] || pathToFileURL(path.resolve("index.html")).href;
     assert.equal(await page.locator(".exp-toggle").count(), 6);
     await page.locator(".exp-toggle").first().click();
     assert.equal(await page.locator("#experience-details-1").isVisible(), true);
+    const implementations = page.locator("#experience-details-1 .client-work-card");
+    assert.equal(await implementations.count(), 4);
+    assert.deepEqual(await implementations.locator(":scope > span").allTextContents(),
+      ["Food & retail enterprise", "Financial services / insurance", "Food & retail enterprise", "Transportation & infrastructure"]);
+    assert.ok((await implementations.nth(2).innerText()).includes("Amazon SageMaker Unified Studio"));
+    assert.ok((await implementations.nth(3).innerText()).includes("AWS account support & cloud provisioning"));
     await page.locator(".exp-toggle").first().click();
     assert.equal(await page.locator("#experience-details-1").isVisible(), false);
     await page.getByRole("button", {name:"Expand all companies",exact:true}).click();
