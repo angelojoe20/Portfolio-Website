@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angelo Joe Delos Santos | DevOps &amp; Cloud Engineer</title>
 
-    <link rel="icon" href="images/icon.png" type="image/png">
+    <link rel="icon" href="images/favicon-48.png" type="image/png" sizes="48x48">
+    <link rel="canonical" href="https://angelojoe-website.vercel.app/">
 
     <!-- SEO -->
     <meta name="description" content="Angelo Joe Delos Santos is a DevOps and Cloud Engineer focused on AWS infrastructure, automation, cloud architecture, and reliable delivery.">
@@ -13,9 +14,14 @@
     <meta property="og:image" content="https://angelojoe-website.vercel.app/images/picture.png">
     <meta property="og:url" content="https://angelojoe-website.vercel.app/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#111827">
-
-    <!-- <link rel="manifest" href="manifest.json" /> -->
+    <meta name="theme-color" content="#f8f9fb">
+    <script>
+      try {
+        const saved = localStorage.getItem("theme");
+        document.documentElement.dataset.theme = saved === "dark" || saved === "light" ? saved :
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch {}
+    </script>
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -23,10 +29,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Angelo">
-    <link rel="apple-touch-icon" href="images/icon.png">
+    <link rel="apple-touch-icon" href="images/app-icon-192.png">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/style.css">
@@ -61,13 +69,14 @@
           <li><a href="#hiking">Beyond Work</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="reading-progress" aria-hidden="true"><span id="readingProgress"></span></div>
       </nav>
 
       <!-- ====== Hero ====== -->
       <section class="hero" id="home">
         <div class="hero-content-container">
           <div class="hero-left">
-            <p class="section-eyebrow">DevOps &amp; Cloud Engineer / Philippines</p>
+            <p class="section-eyebrow hero-eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>DevOps &amp; Cloud Engineer</p>
             <h1 class="hero-title">Angelo Joe Delos Santos</h1>
 
             <p class="hero-tagline">Cloud infrastructure. Thoughtfully built.</p>
@@ -91,16 +100,20 @@
                 </a>
               </div>
             </div>
+            <div class="hero-meta">
+              <a href="#experience"><i data-lucide="briefcase-business" aria-hidden="true"></i>Cloud Engineer III at Stratpoint</a>
+              <a href="#certifications"><i data-lucide="badge-check" aria-hidden="true"></i><span><span id="awsCredentialCount">6</span> AWS certifications</span></a>
+            </div>
           </div>
 
           <div class="hero-right">
             <div class="hero-visual" aria-label="Cloud engineering profile summary">
               <div class="avatar-container">
-              <img src="images/picture.png" alt="Angelo Joe Delos Santos Avatar" class="hero-avatar" fetchpriority="high">
+              <img src="images/portrait.webp" alt="Angelo Joe Delos Santos" class="hero-avatar" width="449" height="449" fetchpriority="high">
               </div>
               <div class="terminal-card">
                 <div class="terminal-top">
-                  <span></span><span></span><span></span>
+                  <span></span><span></span><span></span><small>profile.sh</small>
                 </div>
                 <div class="terminal-lines">
                   <p><span>$</span> whoami</p>
@@ -126,10 +139,10 @@
       <section class="engineering-focus-section" id="engineering-focus">
         <div class="container">
           <div class="focus-header">
-            <p class="section-eyebrow">Engineering Focus</p>
+            <p class="section-eyebrow">01 / Engineering Focus</p>
             <h2 class="section-heading">From architecture to delivery.</h2>
             <p class="section-subtitle">
-              Four areas that connect my day-to-day engineering work.
+              Reliable systems start with a clear design and the details to carry it through.
             </p>
           </div>
 
@@ -186,27 +199,28 @@
         <div class="container">
           <div class="about-me-container">
             <div class="about-me-content">
+              <p class="section-eyebrow">02 / The person behind the work</p>
               <h2 class="section-heading">
                 About
               </h2>
 
               <p class="about-me-description">
-                Hello! I'm Angelo Joe Delos Santos, a
-                <span class="highlight">Computer Engineering graduate</span>
-                building a career around cloud architecture, DevOps, and practical systems that teams can trust.
-                I enjoy turning messy infrastructure requirements into clear designs, repeatable automation, and stable delivery paths.
-                Outside work, I recharge through hiking and exploring new places.
+                I'm a <span class="highlight">Computer Engineering graduate based in the Philippines</span>,
+                building practical cloud systems that teams can trust. My work connects architecture,
+                hands-on implementation, and the documentation that makes a good handover possible.
               </p>
+              <p class="about-me-description">I enjoy making complex infrastructure easier to understand and repeat.
+                Beyond the technical work, I spend time with developer communities and recharge on the trail.</p>
 
               <div class="about-actions">
                 <a href="https://www.linkedin.com/in/angelo-joe-delos-santos-535627283/" class="btn btn-primary" target="_blank" rel="noreferrer">
-                  Connect on LinkedIn
+                  Connect on LinkedIn <i data-lucide="arrow-up-right" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
 
             <div class="about-me-image-container">
-              <img src="images/angelo.png" alt="Angelo Joe Delos Santos Profile Picture" class="about-me-avatar" loading="lazy">
+              <img src="images/about-portrait.webp" alt="Angelo Joe Delos Santos" class="about-me-avatar" width="480" height="641" loading="lazy">
             </div>
           </div>
         </div>
@@ -215,6 +229,7 @@
       <!-- ====== Skills ====== -->
       <section class="skills-section" id="skills">
         <div class="container">
+          <p class="section-eyebrow">03 / Toolkit</p>
           <h2 class="section-heading">
             Skills
           </h2>
@@ -278,6 +293,7 @@
       <!-- ====== Experience (Notion-style log) ====== -->
       <section class="experience-section" id="experience">
         <div class="container">
+          <p class="section-eyebrow">04 / Professional journey</p>
           <h2 class="section-heading">
             Work Experience
           </h2>
@@ -288,6 +304,7 @@
             <article class="exp-item">
               <div class="exp-meta">
                 <span class="exp-dates">May 2026 – Present</span>
+                <span class="current-role">Current role</span>
               </div>
 
               <div class="exp-card">
@@ -624,6 +641,7 @@
       <!-- ====== Leadership ====== -->
       <section id="leadership" class="leadership-section">
         <div class="container">
+          <p class="section-eyebrow">05 / Community</p>
           <h2 class="section-heading">
             Organizations &amp; Leadership
           </h2>
@@ -708,8 +726,7 @@
                   <span class="badge">Core Member, External Relations &amp; Cloud Googler</span>
                   <p class="dates">October 2021 - June 2025</p>
                   <p class="description">
-                    Assisted in organizing developer events and cloud-related activities, fostering engagement within the tech community.
-                    Managed external relations, collaborating with industry partners.
+                    Supported developer and cloud events, coordinated external relations, and collaborated with industry partners.
                   </p>
                   <div class="org-skills">
                     <span class="skill-tag">Developer Events</span>
@@ -726,6 +743,7 @@
       <!-- ====== Certifications ====== -->
       <section id="certifications" class="certifications-section">
         <div class="container">
+          <p class="section-eyebrow">06 / Credentials</p>
           <h2 class="section-heading">Certifications</h2>
           <p class="section-subtitle">Learning backed by independently verifiable credentials.</p>
 
@@ -844,7 +862,7 @@
                 <div class="cert-info">
                   <p class="cert-level">Foundational</p>
                   <h3>watsonx Orchestrate Sales Foundation</h3>
-                  <p class="cert-dates">Issued Sep 5, 2025 · Expires Sep 5, 2026</p>
+                  <p class="cert-dates" data-expires="2026-09-05">Issued Sep 5, 2025 · Expires Sep 5, 2026</p>
                   <p class="cert-summary">Validated foundational knowledge of IBM watsonx Orchestrate, customer conversations, business pain points, skills, and integrations.</p>
                 </div>
                 <div class="cert-actions">
@@ -859,6 +877,7 @@
       <!-- ====== Projects ====== -->
       <section id="projects" class="projects-section">
         <div class="container">
+          <p class="section-eyebrow">07 / Selected work</p>
           <div class="projects-header">
             <h2 class="section-heading">Projects</h2>
             <p class="section-subtitle">Selected builds across cloud infrastructure, apps, automation, and AI-assisted workflows.</p>
@@ -876,8 +895,8 @@
           <div class="projects-grid">
             <article class="project-card" data-category="web ai">
               <picture class="project-picture">
-                <source srcset="images/diskarte-ph-mobile-3x.png" media="(max-width: 640px)">
-                <img src="images/diskarte-ph-desktop-2x.png" alt="Diskarte PH job discovery dashboard screenshot" class="project-image diskarte-project-image" loading="lazy">
+                <source srcset="images/diskarte-mobile.webp" media="(max-width: 640px)">
+                <img src="images/diskarte-desktop.webp" alt="Diskarte PH job discovery dashboard screenshot" class="project-image diskarte-project-image" width="1440" height="900" loading="lazy" data-desktop="images/diskarte-ph-desktop-2x.png" data-mobile="images/diskarte-ph-mobile-3x.png">
               </picture>
               <div class="project-content">
                 <div class="project-meta">
@@ -905,7 +924,7 @@
             </article>
 
             <article class="project-card" data-category="cloud">
-              <img src="images/aws-disaster-recovery.png" alt="Disaster Recovery for AWS CDK repository cover" class="project-image" loading="lazy">
+              <img src="images/aws-disaster-recovery.webp" alt="Disaster Recovery for AWS CDK repository cover" class="project-image" width="1200" height="600" loading="lazy" data-full="images/aws-disaster-recovery.png">
               <div class="project-content">
                 <div class="project-meta">
                   <span class="project-type">Cloud</span>
@@ -931,7 +950,7 @@
             </article>
 
             <article class="project-card" data-category="iot app">
-              <img src="images/vendomed.png" alt="VendoMedicine Screenshot" class="project-image" loading="lazy">
+              <img src="images/vendomed.webp" alt="VendoMedicine Screenshot" class="project-image" width="1200" height="675" loading="lazy" data-full="images/vendomed.png">
               <div class="project-content">
                 <div class="project-meta">
                   <span class="project-type">IoT / App</span>
@@ -959,7 +978,7 @@
             </article>
 
             <article class="project-card" data-category="app">
-              <img src="images/libtech.png" alt="Library Management System Screenshot" class="project-image" loading="lazy">
+              <img src="images/libtech.webp" alt="Library Management System Screenshot" class="project-image" width="900" height="631" loading="lazy" data-full="images/libtech.png">
               <div class="project-content">
                 <div class="project-meta">
                   <span class="project-type">App</span>
@@ -991,6 +1010,7 @@
 <section id="hiking" class="hiking-section">
   <div class="container">
     <div class="hiking-header">
+      <p class="section-eyebrow">08 / Beyond the terminal</p>
       <h2 class="section-heading">Beyond Work</h2>
       <p class="section-subtitle">Away from the terminal, usually on a trail. A few chapters from life outdoors.</p>
     </div>
@@ -998,11 +1018,11 @@
     <div class="hike-stats" aria-label="Hiking stats">
       <div class="stat-card">
         <p class="stat-label">Peaks Summited</p>
-        <p class="stat-value" id="hikeCount">—</p>
+        <p class="stat-value" id="hikeCount">14</p>
       </div>
       <div class="stat-card">
         <p class="stat-label">Latest Hike</p>
-        <p class="stat-value" id="latestHike">—</p>
+        <p class="stat-value" id="latestHike">Jun 27, 2026</p>
       </div>
       <div class="stat-card">
         <p class="stat-label">Goal</p>
@@ -1140,11 +1160,12 @@
 <!-- ====== Contact ====== -->
 <section id="contact" class="contact-section">
   <div class="container">
+    <p class="section-eyebrow">09 / Say hello</p>
     <h2 class="section-heading">Contact</h2>
-    <p class="section-subtitle">Open to opportunities, collaborations, and cloud conversations.</p>
+    <p class="section-subtitle">Good work starts with a conversation.</p>
     <div class="contact-wrapper">
       <div class="contact-info">
-        <p>Whether you're looking for a cloud engineer, want to collaborate on a project, or just want to connect — feel free to reach out. I'll get back to you as soon as I can.</p>
+        <p>Have an infrastructure challenge, a project in mind, or a shared interest in cloud engineering? Let's talk.</p>
         <div class="contact-links">
           <div class="contact-email-row">
             <button class="mail-icon copy-email-btn" type="button" id="copyEmail" data-email="angelojoedelossantos20@gmail.com" aria-label="Copy email address" title="Copy email address">
@@ -1155,13 +1176,13 @@
             </a>
           </div>
           <a href="https://www.linkedin.com/in/angelo-joe-delos-santos-535627283/" class="contact-link" target="_blank" rel="noreferrer">
-            <img src="images/linkedin.png" alt="LinkedIn" class="theme-logo"> linkedin.com/in/angelo-joe-delos-santos
+            <img src="images/linkedin.png" alt="" class="theme-logo"> LinkedIn <i data-lucide="arrow-up-right" aria-hidden="true"></i>
           </a>
           <a href="https://github.com/angelojoe20" class="contact-link" target="_blank" rel="noreferrer">
-            <img src="images/github.png" alt="GitHub" class="theme-logo"> github.com/angelojoe20
+            <img src="images/github.png" alt="" class="theme-logo"> GitHub <i data-lucide="arrow-up-right" aria-hidden="true"></i>
           </a>
           <a href="https://www.instagram.com/https.geloo_/" class="contact-link" target="_blank" rel="noreferrer">
-            <img src="images/instagram.png" alt="Instagram" class="theme-logo"> @https.geloo_
+            <img src="images/instagram.png" alt="" class="theme-logo"> Instagram <i data-lucide="arrow-up-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -1192,6 +1213,18 @@
 </section>
 
     </main>
+    <dialog class="media-dialog" id="mediaDialog" aria-labelledby="mediaTitle">
+      <div class="media-toolbar">
+        <h2 id="mediaTitle"></h2>
+        <div class="media-variants" id="mediaVariants" role="group" aria-label="Screenshot view" hidden>
+          <button type="button" class="icon-btn" data-view="desktop" aria-label="Desktop screenshot" title="Desktop screenshot" aria-pressed="true"><i data-lucide="monitor" aria-hidden="true"></i></button>
+          <button type="button" class="icon-btn" data-view="mobile" aria-label="Mobile screenshot" title="Mobile screenshot" aria-pressed="false"><i data-lucide="smartphone" aria-hidden="true"></i></button>
+        </div>
+        <button type="button" class="icon-btn" id="closeMedia" aria-label="Close preview" title="Close preview"><i data-lucide="x" aria-hidden="true"></i></button>
+      </div>
+      <div class="media-content" id="mediaContent"></div>
+      <div class="media-footer"><p id="mediaStatus" role="status"></p><a class="btn-link" id="mediaSource" target="_blank" rel="noreferrer">View original <i data-lucide="arrow-up-right" aria-hidden="true"></i></a></div>
+    </dialog>
     <!-- ====== Footer ====== -->
     <footer class="footer" role="contentinfo">
       <div class="container">
